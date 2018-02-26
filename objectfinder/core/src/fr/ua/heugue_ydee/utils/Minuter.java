@@ -15,7 +15,7 @@ public class Minuter implements TimeCountStrategy {
      * @param minutes Number of minutes
      * @param seconds Number of seconds
      */
-    public void Minuter(int minutes, int seconds) {
+    public Minuter(int minutes, int seconds) {
         this.time = new Time(0, minutes, seconds, 0);
     }
 
@@ -26,7 +26,7 @@ public class Minuter implements TimeCountStrategy {
      */
     @Override
     public void addTimeMillis(int millis) {
-        this.time.addTime(0, 0, 0, millis);
+        this.time.addTime(0, 0, 0, - millis);
     }
 
     @Override

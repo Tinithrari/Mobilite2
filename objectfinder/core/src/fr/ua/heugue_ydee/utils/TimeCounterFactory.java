@@ -1,33 +1,33 @@
-
-import java.util.*;
+package fr.ua.heugue_ydee.utils;
 
 /**
  * 
  */
-public abstract class TimeCounterFactory {
+public final class TimeCounterFactory {
 
     /**
      * Default constructor
      */
     public TimeCounterFactory() {
+
     }
 
     /**
-     * @return
+     * @return A time count strategy using the chronometer strategy
      */
     public TimeCountStrategy createChronometer() {
-        // TODO implement here
-        return null;
+        return new Chronometer();
     }
 
     /**
-     * @param minutes 
-     * @param second 
-     * @return
+     * Create a time count strategy using the minuter strategy
+     *
+     * @param minutes Number of minutes to set in the minuter
+     * @param second Number of seconds to set in the minuter
+     * @return A time count strategy using the minuter strategy which begin at minutes:seconds
      */
-    public TimeCountStrategy createMinuter(long minutes, int second) {
-        // TODO implement here
-        return null;
+    public TimeCountStrategy createMinuter(int minutes, int second) {
+        return new Minuter(minutes, second);
     }
 
 }
