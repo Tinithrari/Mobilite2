@@ -14,84 +14,88 @@ public class SprintScore {
     }
 
     /**
-     * 
+     * L'identifiant
      */
     private Long id;
 
     /**
-     * 
+     * Le nom du joueur
      */
     private String name;
 
     /**
-     * 
+     * Le temps
      */
     private Time duration;
 
     /**
-     * @param id 
-     * @param name 
-     * @param minutes 
-     * @param seconds 
-     * @param millis
+     * Constructeur de SprintScore prenant l'id, le nom, les minutes, secondes et millisecondes
+     * @param id : l'identifiant
+     * @param name : le nom du joueur
+     * @param minutes : les minutes
+     * @param seconds : les secondes
+     * @param millis : les millisecondes
      */
-    public void SprintScore(Long id, String name, int minutes, int seconds, int millis) {
+    public SprintScore(Long id, String name, int minutes, int seconds, int millis) {
         this.id = id;
         this.name = name;
         this.duration = new Time(0, minutes, seconds, millis);
     }
 
     /**
-     * @param name
-     * @param duration
+     * Constructeur prenant en parametre le nom et la duree
+     * @param name : le nom
+     * @param duration : la duree
      */
-    public void SprintScore(String name, Time duration) {
-        this.id = id;
+    public SprintScore(String name, Time duration) {
+        this.id = Long.valueOf(0);
         this.name = name;
         this.duration = duration;
     }
 
     /**
-     * @return
+     * Retourne l'identifiant
+     * @return : l'identifiant
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * @return
+     * Retourne le nom du joueur
+     * @return : le nom du joueur
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @return
+     * Retourne la duree
+     * @return : la duree
      */
     public Time getDuration() {
         return duration;
     }
 
     /**
-     *
-     * @param id
+     * Modification de l'identifiant
+     * @param id : l'identifiant
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     *
-     * @param name
+     * Modification du nom
+     * @param name : le nom du joueur
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     *
-     * @param duration
+     * Modification de la duree
+     * @param duration : la duree
      */
     public void setDuration(Time duration) {
         this.duration = duration;
