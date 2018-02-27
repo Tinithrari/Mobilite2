@@ -1,14 +1,19 @@
 package model;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteClosable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.ua.heugue_ydee.utils.Time;
+
 /**
- * 
+ * La classe d'Helper qui va permettre d'etablir plusieurs actions avec notre BDD
  */
 public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdaptable {
 
@@ -68,15 +73,18 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL(DROP_TABLE_SPRINT);
-        db.execSQl(DROP_TABLE_DEFI);
+        db.execSQL(DROP_TABLE_DEFI);
         onCreate(db);
     }
 
     /**
-     * @param sprintScore 
-     * @return
+     * Ajoute un nouveau sprintScore dans la table correspondante
+     * @param sprintScore : le sprintscore
      */
-    public void addHighScoreSprint(SprintScore sprintScore) {
+    public void addHighScoreSprint(SprintScore sprintScore) throws IdentifientNotFoundException{
+
+        if(sprintScore.getId() == null)
+            throw new IdentifientNotFoundException();
 
         ContentValues values = new ContentValues();
 
@@ -92,10 +100,13 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
     }
 
     /**
-     * @param defiScore 
-     * @return
+     * Ajoute un defiScore dans la table correspondante
+     * @param defiScore : defiscore
      */
-    public void addHighScoreDefi(DefiScore defiScore) {
+    public void addHighScoreDefi(DefiScore defiScore) throws IdentifientNotFoundException {
+
+        if(defiScore.getId() == null)
+            throw new IdentifientNotFoundException();
 
         ContentValues values = new ContentValues();
 
@@ -109,7 +120,8 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
     }
 
     /**
-     * @return
+     * Retourne la liste des 10 meilleurs score du mode Sprint
+     * @return : la liste des 10 meilleurs score du mode Sprint
      */
     public List<SprintScore> getHighScoreSprintLimitTen() {
 
@@ -120,14 +132,20 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
                 ", " + MILLIS_SPRINT +
                 " LIMIT 10";
 
-        Cursor notreTopDix = this.rawQuery(queryHighScoreSprintLimitTen, null);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor notreTopDix = db.rawQuery(queryHighScoreSprintLimitTen, null);
 
-        List<SprintScore> notreListeDesTopDix = new ArrayList<SprintScore>();
+        List<SprintScore> notreListeDesTopDix = new ArrayList<>();
 
         try {
             while (notreTopDix.moveToNext()) {
-                SprintScore sprintScore = new SprintScore(notreTopDix.getLong(1),notreTopDix.getString(2),notreTopDix.getLong(3),notreTopDix.getInt(4),notreTopDix.getInt(5));
-                notreListeDesTopDix.add(defiScore);
+                //On complete les differents champs
+                SprintScore sprintScore = new SprintScore();
+                sprintScore.setId(notreTopDix.getLong(1));
+                sprintScore.setName(notreTopDix.getString(2));
+                sprintScore.setDuration(new Time(0,notreTopDix.getInt(3),notreTopDix.getInt(4),notreTopDix.getInt(5)));
+
+                notreListeDesTopDix.add(sprintScore);
             }
         } finally {
             notreTopDix.close();
@@ -137,7 +155,8 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
     }
 
     /**
-     * @return
+     * Retourne la liste des 10 meilleurs scores du mode Defi
+     * @return : la liste des 10 meilleurs scores du mode Defi
      */
     public List<DefiScore> getHighScoreDefiLimitTen() {
 
@@ -146,13 +165,22 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
                 " ORDER BY " + SCORE_DEFI +
                 " DESC LIMIT 10";
 
-        Cursor notreTopDix = this.rawQuery(queryHighScoreDefiLimitTen, null);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor notreTopDix = db.rawQuery(queryHighScoreDefiLimitTen, null);
 
-        List<DefiScore> notreListeDesTopDix = new ArrayList<DefiScore>();
+        List<DefiScore> notreListeDesTopDix = new ArrayList<>();
 
         try {
             while (notreTopDix.moveToNext()) {
-                DefiScore defiScore = new DefiScore(notreTopDix.getLong(1),notreTopDix.getString(2),notreTopDix.getLong(3));
+
+                DefiScore defiScore = new DefiScore();
+
+                //On complete les differents champs
+                defiScore.setId(notreTopDix.getLong(1));
+                defiScore.setName(notreTopDix.getString(2));
+                defiScore.setScore(notreTopDix.getInt(3));
+
+                //DefiScore defiScore = new DefiScore(notreTopDix.getLong(1),notreTopDix.getString(2),notreTopDix.getLong(3));
                 notreListeDesTopDix.add(defiScore);
             }
         } finally {
