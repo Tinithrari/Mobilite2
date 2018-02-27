@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteClosable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,10 +80,10 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
      * Ajoute un nouveau sprintScore dans la table correspondante
      * @param sprintScore : le sprintscore
      */
-    public void addHighScoreSprint(SprintScore sprintScore) throws IdentifientNotFoundException{
+    public void addHighScoreSprint(SprintScore sprintScore) throws IdentifierFoundException {
 
-        if(sprintScore.getId() == null)
-            throw new IdentifientNotFoundException();
+        if(sprintScore.getId() != null)
+            throw new IdentifierFoundException();
 
         ContentValues values = new ContentValues();
 
@@ -103,10 +102,10 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
      * Ajoute un defiScore dans la table correspondante
      * @param defiScore : defiscore
      */
-    public void addHighScoreDefi(DefiScore defiScore) throws IdentifientNotFoundException {
+    public void addHighScoreDefi(DefiScore defiScore) throws IdentifierFoundException {
 
-        if(defiScore.getId() == null)
-            throw new IdentifientNotFoundException();
+        if(defiScore.getId() != null)
+            throw new IdentifierFoundException();
 
         ContentValues values = new ContentValues();
 
@@ -115,6 +114,9 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
         values.put(SCORE_DEFI, defiScore.getScore());
 
         SQLiteDatabase db = this.getWritableDatabase();
+
+        if (db.isReadOnly())
+            throw new RuntimeException("Base de données inaccessible");
 
         db.insert(NAME_TABLE_DEFI ,null, values);
     }

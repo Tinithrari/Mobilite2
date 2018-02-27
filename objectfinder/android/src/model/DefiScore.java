@@ -44,7 +44,7 @@ public class DefiScore {
      * @param score : le score
      */
     public DefiScore(String name, long score) {
-        this.id = Long.valueOf(0);
+        this.id = null;
         this.name = name;
         this.score = score;
     }

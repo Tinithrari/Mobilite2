@@ -12,13 +12,13 @@ public interface DatabaseAdaptable {
      * Ajoute un score issu du mode Sprint dans la table
      * @param sprintScore
      */
-    public void addHighScoreSprint(SprintScore sprintScore) throws IdentifientNotFoundException;
+    public void addHighScoreSprint(SprintScore sprintScore) throws IdentifierFoundException;
 
     /**
      * Ajoute un score issu du mode Defi dans la table
      * @param defiScore
      */
-    public void addHighScoreDefi(DefiScore defiScore) throws IdentifientNotFoundException;
+    public void addHighScoreDefi(DefiScore defiScore) throws IdentifierFoundException;
 
     /**
      * @return la liste des 10 meilleurs du mode Sprint
