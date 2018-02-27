@@ -105,13 +105,16 @@ public class Time {
 
         while (this.minutes < 0)
         {
-            this.minutes = MAX_MINUTES + this.milliseconds;
+            this.minutes = MAX_MINUTES + this.minutes;
             this.hours -= 1;
         }
 
         if (this.hours < 0)
         {
             this.hours = 0;
+            this.minutes = 0;
+            this.seconds = 0;
+            this.milliseconds = 0;
         }
     }
 

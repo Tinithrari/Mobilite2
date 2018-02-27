@@ -1,5 +1,4 @@
-
-import java.util.*;
+package fr.ua.heugue_ydee.utils;
 
 /**
  * 
@@ -12,17 +11,16 @@ public class DBAdapter {
     public DBAdapter() {
     }
 
-    /**
-     * 
-     */
+    /*
     private DatabaseAdaptable database;
 
     /**
      * @param database
-     */
+
     public void DBAdapter(DatabaseAdaptable database) {
         // TODO implement here
     }
+    */
 
     /**
      * @param name 

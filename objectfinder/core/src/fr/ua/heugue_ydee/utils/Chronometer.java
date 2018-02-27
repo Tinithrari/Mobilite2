@@ -12,7 +12,7 @@ public class Chronometer implements TimeCountStrategy {
     /**
      * Default constructor
      */
-    public Chronometer() throws CloneNotSupportedException {
+    public Chronometer() {
         this.time = new Time();
     }
 
