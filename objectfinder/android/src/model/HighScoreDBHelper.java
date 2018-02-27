@@ -1,11 +1,11 @@
-package fr.ua.heugue_ydee.model;
-
-import java.util.*;
+package model;
 
 import android.content.Context;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 

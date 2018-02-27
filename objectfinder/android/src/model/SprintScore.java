@@ -1,7 +1,6 @@
-package fr.ua.heugue_ydee.model;
+package model;
 
 import fr.ua.heugue_ydee.utils.Time;
-import java.util.*;
 
 /**
  * 
@@ -36,17 +35,17 @@ public class SprintScore {
      * @param seconds 
      * @param millis
      */
-    public void SprintScore(Long id, java.lang.String name, int minutes, int seconds, int millis) {
+    public void SprintScore(Long id, String name, int minutes, int seconds, int millis) {
         this.id = id;
         this.name = name;
         this.duration = new Time(0, minutes, seconds, millis);
     }
 
     /**
-     * @param name 
+     * @param name
      * @param duration
      */
-    public void SprintScore(java.lang.String name, Time duration) {
+    public void SprintScore(String name, Time duration) {
         this.id = id;
         this.name = name;
         this.duration = duration;
