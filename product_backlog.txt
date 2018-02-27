@@ -1,0 +1,29 @@
+Product backlog 
+ 
+Fonctionnalité : 
+— Jeux 
+     \--- Mode Versus ? 
+     \--- Menu ** 7 **
+           \--- Choix du mode de difficulté ** 10 **
+           \--- Choix du mode de jeux ** 10 **
+           \--- Choix d’un thème ?
+     \--- Score ** 10 **
+           \--- Score Sprint ** 10 ** 
+           \--- Score défi ** 10 **
+           \--- Tableaux des records ** 10 ** 
+     \— Camera   ** 10 ** 
+            \--- Glissement ** 10 ** 
+            \--- Zoom ? 
+            \--- Click ** 10 **
+     \— Surface ** 5 **
+            \--- Gestion de textures ** 5 ** 
+            \--- Gestion de tuilages ? 
+     \--- Evenements aléatoire ** 2 **
+           \--- Pluie ** 1 **
+           \--- Grenouille ** 3 **
+           \--- Poulpe (tache d’encre, merci mario kart) ** 1 **
+           \--- Raton laveur qui embarque l’objet ? 
+     \— Objets interactifs ** 10 ** 
+           \--- Réaction au click  ** 10 **
+           \--- Carré ** 10 **
+           \--- Système de bonus ** 4 ** 
