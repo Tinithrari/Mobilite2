@@ -1,6 +1,4 @@
-package fr.ua.heugue_ydee.model;
-
-import java.util.*;
+package model;
 
 /**
  * 
@@ -21,29 +19,29 @@ public class DefiScore {
     /**
      * 
      */
-    private java.lang.String name;
+    private String name;
 
     /**
-     * 
+     *
      */
     private long score;
 
     /**
-     * @param id 
-     * @param name 
+     * @param id
+     * @param name
      * @param score
      */
-    public void DefiScore(Long id, java.lang.String name, long score) {
+    public void DefiScore(Long id, String name, long score) {
         this.id = new Long(id);
         this.name = name;
         this.score = score;
     }
 
     /**
-     * @param name 
+     * @param name
      * @param score
      */
-    public void DefiScore(java.lang.String name, long score) {
+    public void DefiScore(String name, long score) {
         this.id = new Long(0);
         this.name = name;
         this.score = score;

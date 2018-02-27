@@ -1,6 +1,6 @@
-package fr.ua.heugue_ydee.model;
+package model;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * 
