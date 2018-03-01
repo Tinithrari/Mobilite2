@@ -24,10 +24,9 @@ public abstract class ParticlePhysics {
         this.position = position;
         this.inverseMass = 1 / mass;
 
-        this.forces = Vector2.Zero;
-        this.velocity = Vector2.Zero;
-        this.acceleration = Vector2.Zero;
-        this.position = Vector2.Zero;
+        this.forces = new Vector2(Vector2.Zero);
+        this.velocity = new Vector2(Vector2.Zero);
+        this.acceleration = new Vector2(Vector2.Zero);
     }
 
     /**
@@ -36,7 +35,7 @@ public abstract class ParticlePhysics {
      * @param force The force to add to the particle system
      */
     public final void addForce(Vector2 force) {
-        this.forces = this.forces.add(force);
+        this.forces.add(force);
     }
 
     /**
@@ -46,15 +45,16 @@ public abstract class ParticlePhysics {
      * @param delta the delta time between two update
      */
     public void update(float delta) {
-        this.position = this.position.add(this.velocity.scl(delta));
-        this.acceleration = this.forces.scl(this.inverseMass);
-        this.velocity = this.velocity.add(this.acceleration.scl(delta));
-
-        // Reducing velocity
-        this.velocity = this.velocity.add(this.acceleration.scl(delta).scl(-1));
+        this.acceleration = new Vector2(this.forces).scl(this.inverseMass);
+        this.velocity.add(new Vector2(this.acceleration).scl(delta));
 
         // Reinitialize force
-        this.forces = Vector2.Zero;
+        this.forces = new Vector2(Vector2.Zero);
+
+        this.position.add(new Vector2(this.velocity).scl(delta));
+
+        // Reducing velocity
+        this.velocity.scl(0.9f);
     }
 
     /**
