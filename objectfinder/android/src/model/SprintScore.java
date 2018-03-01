@@ -5,7 +5,7 @@ import fr.ua.heugue_ydee.utils.Time;
 /**
  * 
  */
-public class SprintScore {
+public class SprintScore implements Score{
 
     /**
      * Default constructor
@@ -99,5 +99,13 @@ public class SprintScore {
      */
     public void setDuration(Time duration) {
         this.duration = duration;
+    }
+
+    @Override
+    /**
+     * Affichage de nos differentes informations pour le score Sprint
+     */
+    public String toString(){
+        return this.name + " : " + this.duration.toString();
     }
 }
