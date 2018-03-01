@@ -65,7 +65,7 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
 
         //On remplit la view (classement et le score associe)
         TextView tvClassement = (TextView) convertView.findViewById(R.id.Classement);
-        tvClassement.setText(String.valueOf(position) + " - ");
+        tvClassement.setText(String.valueOf(position + 1) + " - ");
 
         TextView tvRecord = (TextView) convertView.findViewById(R.id.Record);
         tvRecord.setText(score.toString());
@@ -73,13 +73,20 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
         //Couleur de fond en fonction du classement
         switch (position){
             case 0 :
-                convertView.setBackgroundColor(Color.rgb(255,215,0)); // Couleur OR
+                tvClassement.setTextColor(Color.rgb(255,215,0));
+                tvRecord.setTextColor(Color.rgb(255,215,0)); // Couleur OR
                 break;
             case 1 :
-                convertView.setBackgroundColor(Color.rgb(192,192,192)); // Couleur ARGENT
+                tvClassement.setTextColor(Color.rgb(172,172,172));
+                tvRecord.setTextColor(Color.rgb(172,172,172)); // Couleur ARGENT
                 break;
             case 2 :
-                convertView.setBackgroundColor(Color.rgb(97,78,26)); // Couleur BRONZE
+                tvClassement.setTextColor(Color.rgb(97,78,26));
+                tvRecord.setTextColor(Color.rgb(97,78,26));// Couleur BRONZE
+                break;
+            default:
+                tvClassement.setTextColor(Color.BLACK);
+                tvRecord.setTextColor(Color.BLACK);// Couleur noire
                 break;
         }
 
