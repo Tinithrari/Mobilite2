@@ -7,12 +7,12 @@ Fonctionnalité :
            \--- Choix du mode de difficulté ** 10 **
            \--- Choix du mode de jeux ** 10 **
            \--- Choix d’un thème ?
-     \--- Score ** 10 **
-           \--- Score Sprint ** 10 ** 
-           \--- Score défi ** 10 **
-           \--- Tableaux des records ** 10 ** 
-     \— Camera   ** 10 ** 
-            \--- Glissement ** 10 ** 
+     \--- Score ** FINI **
+           \--- Score Sprint ** FINI ** 
+           \--- Score défi ** FINI **
+           \--- Tableaux des records ** FINI ** 
+     \— Camera   ** 3 ** 
+            \--- Glissement ** FINI ** 
             \--- Zoom ? 
             \--- Click ** 10 **
      \— Surface ** 5 **
