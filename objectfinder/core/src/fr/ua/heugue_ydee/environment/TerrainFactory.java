@@ -1,5 +1,9 @@
 package fr.ua.heugue_ydee.environment;
 
+import com.badlogic.gdx.graphics.Color;
+
+import fr.ua.heugue_ydee.utils.ClickObservable;
+
 /**
  * Terrain factory
  */
@@ -13,8 +17,8 @@ public final class TerrainFactory {
      * @param color The color of the terrain
      * @return A colored terrain
      */
-    public Terrain createColoredTerrain(int width, int height, com.badlogic.gdx.graphics.Color color) {
-        return new ColoredTerrain(width, height, color);
+    public Terrain createColoredTerrain(int width, int height, Color color, ClickObservable clickObservable) {
+        return new ColoredTerrain(width, height, color, clickObservable);
     }
 
 }

@@ -90,7 +90,9 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor, Cl
         this.oldPosition = null;
         this.dragging = false;
         if (clickZone != null) {
-            notifyObserver(new Vector2(x, y));
+            Vector3 position = camera.unproject(new Vector3(x, y, 0));
+            Vector2 position2D = new Vector2(position.x, position.y);
+            notifyObserver(position2D);
         }
         return true;
     }
