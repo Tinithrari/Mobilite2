@@ -18,18 +18,18 @@ import fr.ua.heugue_ydee.utils.DummyClickObserver;
 public class TestColoredTerrainScene {
     private Stage sceneGraph;
     private CameraGesture camera;
-    private static final int coefficient = 4;
-    private static final int worldWidth = Gdx.graphics.getWidth() / TestColoredTerrainScene.coefficient;
-    private static final int worldHeight = Gdx.graphics.getHeight() / TestColoredTerrainScene.coefficient;
+    private static final int coefficient = 2;
+    private static final int worldWidth = Gdx.graphics.getWidth() * TestColoredTerrainScene.coefficient;
+    private static final int worldHeight = Gdx.graphics.getHeight() * TestColoredTerrainScene.coefficient;
 
     public TestColoredTerrainScene() {
         this.sceneGraph = new Stage(new ScreenViewport());
         TerrainFactory factory = new TerrainFactory();
-        Terrain t = factory.createColoredTerrain(worldWidth, worldHeight, Color.BLUE);
-        this.sceneGraph.addActor(t);
         this.camera = new CameraGesture(this.sceneGraph.getCamera(), 0.0025f);
+        Terrain t = factory.createColoredTerrain(worldWidth, worldHeight, Color.WHITE,camera );
+        this.sceneGraph.addActor(t);
         Gdx.input.setInputProcessor(this.camera);
-        this.camera.addClickObserver(new DummyClickObserver());
+        //this.camera.addClickObserver(new DummyClickObserver());
     }
 
     public void render() {

@@ -1,14 +1,12 @@
 package fr.ua.heugue_ydee.environment;
 
-import java.util.*;
-
 /**
- * 
+ * Permits to observe object which can be destructed
  */
 public interface DestroyableObserver {
 
     /**
-     * 
+     * Notify this object of the destruction of an object
      */
     void notifyDestroyableObserver(DestroyableObservable obs);
 
