@@ -3,7 +3,7 @@ package model;
 /**
  * 
  */
-public class DefiScore {
+public class DefiScore implements Score{
 
     /**
      * Default constructor
@@ -95,5 +95,13 @@ public class DefiScore {
      */
     public void setScore(long score) {
         this.score = score;
+    }
+
+    @Override
+    /**
+     * Affichage de nos differentes informations pour le score Defi
+     */
+    public String toString(){
+        return this.name + " : " + this.score;
     }
 }
