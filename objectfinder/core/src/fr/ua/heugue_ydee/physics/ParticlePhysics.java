@@ -3,9 +3,8 @@ package fr.ua.heugue_ydee.physics;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * Created by xavie on 01/03/2018.
+ * Abstract class for particle physics implementation
  */
-
 public abstract class ParticlePhysics {
     private Vector2 forces;
     private Vector2 velocity;
