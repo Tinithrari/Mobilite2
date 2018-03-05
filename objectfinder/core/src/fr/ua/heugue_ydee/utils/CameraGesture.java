@@ -1,5 +1,6 @@
 package fr.ua.heugue_ydee.utils;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Camera;
@@ -7,18 +8,24 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import fr.ua.heugue_ydee.physics.ParticlePhysics;
 
 /**
  * Camera wrapper to manage movement
  */
-public class CameraGesture extends ParticlePhysics implements InputProcessor {
+public class CameraGesture extends ParticlePhysics implements InputProcessor, ClickObservable {
     private Camera camera;
 
     private Rectangle clickZone;
     private Vector2 oldPosition;
+    private List<ClickObserver> clickObservers;
 
     private boolean dragging;
+
+    private final float PERCENTAGE = 0.025f;
 
     /**
      * Create a physic encapsulation for a camera
@@ -32,6 +39,7 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor {
         this.dragging = false;
         this.clickZone = null;
         this.oldPosition = null;
+        this.clickObservers = new LinkedList<ClickObserver>();
     }
 
     /**
@@ -68,6 +76,9 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor {
 
         this.oldPosition = new Vector2(x, y);
         this.dragging = true;
+        int widthper = (int)(Gdx.graphics.getWidth() * PERCENTAGE);
+        int heightper = (int)(Gdx.graphics.getHeight() * PERCENTAGE);
+        this.clickZone = new Rectangle(x - widthper, y - heightper, widthper * 2, heightper * 2);
         return true;
     }
 
@@ -78,6 +89,9 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor {
 
         this.oldPosition = null;
         this.dragging = false;
+        if (clickZone != null) {
+            notifyObserver(new Vector2(x, y));
+        }
         return true;
     }
 
@@ -91,6 +105,11 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor {
         forces = new Vector2(-forces.x, forces.y);
         this.addForce(forces);
         this.oldPosition = new Vector2(x, y);
+
+        if (clickZone != null) {
+            if (! clickZone.contains(x, y))
+                clickZone = null;
+        }
         return true;
     }
 
@@ -102,5 +121,35 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor {
     @Override
     public boolean scrolled(int i) {
         return false;
+    }
+
+    /**
+     * Add a click observer to the list of this observable object
+     *
+     * @param clickObserver The click observer to add
+     */
+    @Override
+    public void addClickObserver(ClickObserver clickObserver) {
+        this.clickObservers.add(clickObserver);
+    }
+
+    /**
+     * Remove a click observer from the list of this observable object
+     *
+     * @param clickObserver The clickObserver to remove
+     */
+    @Override
+    public void removeClickObserver(ClickObserver clickObserver) {
+        this.clickObservers.remove(clickObserver);
+    }
+
+    /**
+     * Notify all observer of the list
+     */
+    @Override
+    public void notifyObserver(Vector2 position) {
+        for (ClickObserver obs : clickObservers) {
+            obs.notifyClick(position);
+        }
     }
 }
