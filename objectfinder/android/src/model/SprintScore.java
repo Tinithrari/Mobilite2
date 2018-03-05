@@ -5,7 +5,7 @@ import fr.ua.heugue_ydee.utils.Time;
 /**
  * 
  */
-public class SprintScore implements Score{
+public class SprintScore {
 
     /**
      * Default constructor
@@ -14,98 +14,86 @@ public class SprintScore implements Score{
     }
 
     /**
-     * L'identifiant
+     * 
      */
     private Long id;
 
     /**
-     * Le nom du joueur
+     * 
      */
     private String name;
 
     /**
-     * Le temps
+     * 
      */
     private Time duration;
 
     /**
-     * Constructeur de SprintScore prenant l'id, le nom, les minutes, secondes et millisecondes
-     * @param id : l'identifiant
-     * @param name : le nom du joueur
-     * @param minutes : les minutes
-     * @param seconds : les secondes
-     * @param millis : les millisecondes
+     * @param id 
+     * @param name 
+     * @param minutes 
+     * @param seconds 
+     * @param millis
      */
-    public SprintScore(Long id, String name, int minutes, int seconds, int millis) {
+    public void SprintScore(Long id, String name, int minutes, int seconds, int millis) {
         this.id = id;
         this.name = name;
         this.duration = new Time(0, minutes, seconds, millis);
     }
 
     /**
-     * Constructeur prenant en parametre le nom et la duree
-     * @param name : le nom
-     * @param duration : la duree
+     * @param name
+     * @param duration
      */
-    public SprintScore(String name, Time duration) {
-        this.id = Long.valueOf(0);
+    public void SprintScore(String name, Time duration) {
+        this.id = id;
         this.name = name;
         this.duration = duration;
     }
 
     /**
-     * Retourne l'identifiant
-     * @return : l'identifiant
+     * @return
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * Retourne le nom du joueur
-     * @return : le nom du joueur
+     * @return
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Retourne la duree
-     * @return : la duree
+     *
+     * @return
      */
     public Time getDuration() {
         return duration;
     }
 
     /**
-     * Modification de l'identifiant
-     * @param id : l'identifiant
+     *
+     * @param id
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * Modification du nom
-     * @param name : le nom du joueur
+     *
+     * @param name
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Modification de la duree
-     * @param duration : la duree
+     *
+     * @param duration
      */
     public void setDuration(Time duration) {
         this.duration = duration;
-    }
-
-    @Override
-    /**
-     * Affichage de nos differentes informations pour le score Sprint
-     */
-    public String toString(){
-        return this.name + " : " + this.duration.toString();
     }
 }
