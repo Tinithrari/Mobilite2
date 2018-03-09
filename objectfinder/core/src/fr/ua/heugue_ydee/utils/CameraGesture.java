@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 import java.util.LinkedList;
 import java.util.List;
 
+import fr.ua.heugue_ydee.environment.Terrain;
 import fr.ua.heugue_ydee.physics.ParticlePhysics;
 
 /**
@@ -22,6 +23,7 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor, Cl
     private Rectangle clickZone;
     private Vector2 oldPosition;
     private List<ClickObserver> clickObservers;
+    private Terrain terrain;
 
     private boolean dragging;
 
@@ -32,14 +34,16 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor, Cl
      *
      * @param camera The camera to control
      * @param mass The mass of the camera
+     * @param terrain The terrain to ankle the camera
      */
-    public CameraGesture(Camera camera, float mass) {
+    public CameraGesture(Camera camera, float mass, Terrain terrain) {
         super(new Vector2(camera.position.x, camera.position.y), mass);
         this.camera = camera;
         this.dragging = false;
         this.clickZone = null;
         this.oldPosition = null;
         this.clickObservers = new LinkedList<ClickObserver>();
+        this.terrain = terrain;
     }
 
     /**
