@@ -13,4 +13,10 @@ public interface TimeCountStrategy {
      */
     void addTimeMillis(int millis);
 
+    /**
+     * Get the time
+     *
+     * @return the time stocked in this strategy
+     */
+    Time getTime();
 }

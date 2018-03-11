@@ -56,6 +56,16 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor, Cl
         this.camera.translate(
                 new Vector3(super.getPosition().x, super.getPosition().y, 0).add(new Vector3(this.camera.position).scl(-1))
         );
+
+        if (this.camera.position.x < 0)
+            this.camera.translate(this.camera.position.x, 0, 0);
+        if (this.camera.position.x > this.terrain.getWidth())
+            this.camera.translate(-this.terrain.getWidth() - this.camera.position.x, 0, 0);
+        if (this.camera.position.y < 0)
+            this.camera.translate(0, -this.terrain.getHeight(), 0);
+        if (this.camera.position.y > this.terrain.getHeight())
+            this.camera.translate(0, this.terrain.getHeight() - this.camera.position.y, 0);
+
     }
 
     @Override
@@ -116,6 +126,8 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor, Cl
             if (! clickZone.contains(x, y))
                 clickZone = null;
         }
+
+
         return true;
     }
 
