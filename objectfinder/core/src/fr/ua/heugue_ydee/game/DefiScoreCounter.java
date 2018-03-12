@@ -75,4 +75,12 @@ public class DefiScoreCounter implements ScoreCounterStrategy {
         for (EndOfGameObserver obs: observers)
             obs.notifyEndOfGame();
     }
+
+    public int getScore() {
+        return score;
+    }
+
+    public TimeCountStrategy getTimeCountStrategy() {
+        return timeCountStrategy;
+    }
 }

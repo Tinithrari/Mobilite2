@@ -3,6 +3,7 @@ package fr.ua.heugue_ydee.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
@@ -14,6 +15,7 @@ public abstract class ScoreDisplayerStrategy {
     private static final int HEIGHT_RATIO = 10;
     private static final float ALPHA_VALUE = 0.2f;
     protected SpriteBatch batch;
+    protected BitmapFont font;
 
     /**
      * Build the base for score display
@@ -25,6 +27,7 @@ public abstract class ScoreDisplayerStrategy {
         this.banner = new Texture(pixmap);
         pixmap.dispose();
         this.batch = new SpriteBatch();
+        this.font = new BitmapFont();
     }
 
     /**

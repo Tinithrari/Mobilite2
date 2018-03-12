@@ -10,27 +10,27 @@ public class GameBuilder {
     /**
      * The easy difficulty
      */
-    public static int EASY_DIFFICULTY = 0;
+    public static final int EASY_DIFFICULTY = 0;
 
     /**
      * The normal difficulty
      */
-    public static int NORMAL_DIFFICULTY = 1;
+    public static final int NORMAL_DIFFICULTY = 1;
 
     /**
      * The hard difficulty
      */
-    public static int HARD_DIFFICULTY = 2;
+    public static final int HARD_DIFFICULTY = 2;
 
     /**
      * The sprint mode
      */
-    public static int SPRINT_MODE = 0;
+    public static final int SPRINT_MODE = 0;
 
     /**
      * The defi mode
      */
-    public static int DEFI_MODE = 1;
+    public static final int DEFI_MODE = 1;
 
     private int difficulty;
     private int mode;

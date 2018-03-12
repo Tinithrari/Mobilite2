@@ -1,6 +1,7 @@
 package fr.ua.heugue_ydee.game;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 
 /**
  * Display the score for the defi mode
@@ -8,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 public class DefiScoreDisplayer extends ScoreDisplayerStrategy {
 
     private DefiScoreCounter counter;
+    private GlyphLayout scoreLayout;
+    private GlyphLayout timeLayout;
 
     /**
      * Build a defi score displayer
@@ -16,6 +19,8 @@ public class DefiScoreDisplayer extends ScoreDisplayerStrategy {
      */
     public DefiScoreDisplayer(DefiScoreCounter counter) {
         this.counter = counter;
+        this.scoreLayout = new GlyphLayout();
+        this.timeLayout = new GlyphLayout();
     }
 
     /**
@@ -31,6 +36,9 @@ public class DefiScoreDisplayer extends ScoreDisplayerStrategy {
     @Override
     public void draw() {
         super.draw();
-        // TODO
+        this.scoreLayout.setText(this.font, "Score: " + this.counter.getScore());
+        this.timeLayout.setText(this.font, "Time: " + this.counter.getTimeCountStrategy().getTime().toString());
+        this.font.draw(batch, this.scoreLayout, 0, 0);
+        this.font.draw(batch, this.timeLayout, Gdx.graphics.getWidth() - this.timeLayout.width, 0);
     }
 }

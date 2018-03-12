@@ -30,6 +30,7 @@ public class SprintScore implements Score{
 
     /**
      * Constructeur de SprintScore prenant l'id, le nom, les minutes, secondes et millisecondes
+     *
      * @param id : l'identifiant
      * @param name : le nom du joueur
      * @param minutes : les minutes
@@ -44,6 +45,7 @@ public class SprintScore implements Score{
 
     /**
      * Constructeur prenant en parametre le nom et la duree
+     *
      * @param name : le nom
      * @param duration : la duree
      */
@@ -55,6 +57,7 @@ public class SprintScore implements Score{
 
     /**
      * Retourne l'identifiant
+     *
      * @return : l'identifiant
      */
     public Long getId() {
@@ -63,6 +66,7 @@ public class SprintScore implements Score{
 
     /**
      * Retourne le nom du joueur
+     *
      * @return : le nom du joueur
      */
     public String getName() {
@@ -71,6 +75,7 @@ public class SprintScore implements Score{
 
     /**
      * Retourne la duree
+     *
      * @return : la duree
      */
     public Time getDuration() {
@@ -87,6 +92,7 @@ public class SprintScore implements Score{
 
     /**
      * Modification du nom
+     *
      * @param name : le nom du joueur
      */
     public void setName(String name) {
@@ -95,16 +101,19 @@ public class SprintScore implements Score{
 
     /**
      * Modification de la duree
+     *
      * @param duration : la duree
      */
     public void setDuration(Time duration) {
         this.duration = duration;
     }
 
-    @Override
     /**
-     * Affichage de nos differentes informations pour le score Sprint
+     * Donne une chaine de caractère représentant l'objet
+     *
+     * @return Retourne le score formatté en chaine de caractere
      */
+    @Override
     public String toString(){
         return this.name + " : " + this.duration.toString();
     }

@@ -1,11 +1,15 @@
 package fr.ua.heugue_ydee.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+
 /**
  * Strategy to display the score for the sprint mode
  */
 public class SprintScoreDisplayer extends ScoreDisplayerStrategy {
 
     private SprintScoreCounter counter;
+    private GlyphLayout timeLayout;
 
     /**
      * Build a sprint score displayer
@@ -15,6 +19,7 @@ public class SprintScoreDisplayer extends ScoreDisplayerStrategy {
     public SprintScoreDisplayer(SprintScoreCounter counter) {
         super();
         this.counter = counter;
+        this.timeLayout = new GlyphLayout();
     }
 
     /**
@@ -30,6 +35,7 @@ public class SprintScoreDisplayer extends ScoreDisplayerStrategy {
     @Override
     public void draw() {
         super.draw();
-        // TODO
+        this.timeLayout.setText(font, "Time: " + this.counter.getTimeCountStrategy().getTime().toString());
+        font.draw(batch, this.timeLayout, Gdx.graphics.getWidth() - this.timeLayout.width, 0);
     }
 }

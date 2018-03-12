@@ -53,7 +53,6 @@ public class ColoredTerrain extends Terrain implements DestroyableObserver {
         this.rectangle = new DrawableRectangle(position, width, height, Color.BLACK);
         this.rectangle.addDestroyableObserver(this);
         this.clickEventManager.addClickObserver(this.rectangle);
-        System.out.println(position.toString());
     }
 
     @Override

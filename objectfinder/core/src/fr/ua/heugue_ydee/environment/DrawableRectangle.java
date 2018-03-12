@@ -106,7 +106,6 @@ public class DrawableRectangle extends Actor implements ClickObserver, Destroyab
         if (collider.contains(position)) {
             this.touched = true;
             this.toAlpha = true;
-            System.out.println("Ouch");
         }
     }
 

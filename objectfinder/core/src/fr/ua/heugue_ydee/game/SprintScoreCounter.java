@@ -70,4 +70,8 @@ public class SprintScoreCounter implements ScoreCounterStrategy {
     public void update(int delta) {
         this.timeCountStrategy.addTimeMillis(delta);
     }
+
+    public TimeCountStrategy getTimeCountStrategy() {
+        return timeCountStrategy;
+    }
 }
