@@ -12,7 +12,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        Button testButton = findViewById(R.id.testButton);
+        Button testButton = findViewById(R.id.jouerButton);
         testButton.setOnClickListener(this);
         Button highscoreButton = findViewById(R.id.highScoreButton);
         highscoreButton.setOnClickListener(this);
@@ -21,8 +21,8 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.testButton:
-                Intent intentTest = new Intent(this, AndroidLauncher.class);
+            case R.id.jouerButton:
+                Intent intentTest = new Intent(this, ActivityPreGame.class);
                 startActivity(intentTest);
                 break;
 
