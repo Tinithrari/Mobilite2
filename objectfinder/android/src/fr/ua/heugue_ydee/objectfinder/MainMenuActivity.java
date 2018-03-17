@@ -6,6 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Score;
+
 public class MainMenuActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
@@ -28,6 +33,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.highScoreButton:
                 Intent intentHighscore = new Intent(this, TableauRecords.class);
+                intentHighscore.putExtra("LISTE_RECORDS",new ArrayList<Score>());
                 startActivity(intentHighscore);
                 break;
         }

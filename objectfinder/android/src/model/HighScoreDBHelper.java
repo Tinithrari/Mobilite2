@@ -53,7 +53,7 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
             "CREATE TABLE " + NAME_TABLE_DEFI + " (" +
                     ID_DEFI + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     NAME_DEFI + " TEXT, " +
-                    SCORE_DEFI + " INTEGER " +
+                    SCORE_DEFI + " INTEGER, " +
                     DIFFICULTE_DEFI + " TEXT)";
 
     //Requete de suppression des tables
@@ -111,6 +111,9 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
 
         SQLiteDatabase db = this.getWritableDatabase();
 
+        if (db.isReadOnly())
+            throw new RuntimeException("Base de données inaccessible");
+
         db.insert(NAME_TABLE_SPRINT ,null, values);
     }
 
@@ -153,7 +156,7 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
      * Retourne la liste des 10 meilleurs score du mode Sprint
      * @return : la liste des 10 meilleurs score du mode Sprint
      */
-    public List<SprintScore> getHighScoreSprintLimitTen(int indDifficulte) {
+    public List<Score> getHighScoreSprintLimitTen(int indDifficulte) {
 
         String difficulte = "";
 
@@ -171,8 +174,8 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
 
         final String queryHighScoreSprintLimitTen = "SELECT * " +
                 "FROM " + NAME_TABLE_SPRINT +
-                " WHERE " + DIFFICULTE_SPRINT + " = " + difficulte +
-                " ORDER BY " + MINUTES_SPRINT +
+                " WHERE " + DIFFICULTE_SPRINT + " = '" + difficulte +
+                "' ORDER BY " + MINUTES_SPRINT +
                 ", " + SECONDS_SPRINT +
                 ", " + MILLIS_SPRINT +
                 " LIMIT 10";
@@ -180,18 +183,23 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor notreTopDix = db.rawQuery(queryHighScoreSprintLimitTen, null);
 
-        List<SprintScore> notreListeDesTopDix = new ArrayList<>();
+        List<Score> notreListeDesTopDix = new ArrayList<>();
 
         try {
-            while (notreTopDix.moveToNext()) {
-                //On complete les differents champs
-                SprintScore sprintScore = new SprintScore();
-                sprintScore.setId(notreTopDix.getLong(1));
-                sprintScore.setName(notreTopDix.getString(2));
-                sprintScore.setDuration(new Time(0,notreTopDix.getInt(3),notreTopDix.getInt(4),notreTopDix.getInt(5)));
 
-                notreListeDesTopDix.add(sprintScore);
+            if(notreTopDix != null){
+                if(notreTopDix.moveToFirst()){
+                    do {
+                        SprintScore sprintScore = new SprintScore();
+                        //sprintScore.setId(notreTopDix.getLong(1));
+                        sprintScore.setName(notreTopDix.getString(1));
+                        sprintScore.setDuration(new Time(0,notreTopDix.getInt(2),notreTopDix.getInt(3),notreTopDix.getInt(4)));
+
+                        notreListeDesTopDix.add(sprintScore);
+                    } while (notreTopDix.moveToNext());
+                }
             }
+
         } finally {
             notreTopDix.close();
         }
@@ -203,7 +211,7 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
      * Retourne la liste des 10 meilleurs scores du mode Defi
      * @return : la liste des 10 meilleurs scores du mode Defi
      */
-    public List<DefiScore> getHighScoreDefiLimitTen(int indDifficulte) {
+    public List<Score> getHighScoreDefiLimitTen(int indDifficulte) {
 
         String difficulte = "";
 
@@ -221,14 +229,14 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
 
         final String queryHighScoreDefiLimitTen = "SELECT * " +
                 "FROM " + NAME_TABLE_DEFI +
-                " WHERE " + DIFFICULTE_DEFI + " = " + difficulte +
-                " ORDER BY " + SCORE_DEFI +
+                " WHERE " + DIFFICULTE_DEFI + " = '" + difficulte +
+                "' ORDER BY " + SCORE_DEFI +
                 " DESC LIMIT 10";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor notreTopDix = db.rawQuery(queryHighScoreDefiLimitTen, null);
 
-        List<DefiScore> notreListeDesTopDix = new ArrayList<>();
+        List<Score> notreListeDesTopDix = new ArrayList<>();
 
         try {
             while (notreTopDix.moveToNext()) {
@@ -236,11 +244,9 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
                 DefiScore defiScore = new DefiScore();
 
                 //On complete les differents champs
-                defiScore.setId(notreTopDix.getLong(1));
-                defiScore.setName(notreTopDix.getString(2));
-                defiScore.setScore(notreTopDix.getInt(3));
+                defiScore.setName(notreTopDix.getString(1));
+                defiScore.setScore(notreTopDix.getInt(2));
 
-                //DefiScore defiScore = new DefiScore(notreTopDix.getLong(1),notreTopDix.getString(2),notreTopDix.getLong(3));
                 notreListeDesTopDix.add(defiScore);
             }
         } finally {

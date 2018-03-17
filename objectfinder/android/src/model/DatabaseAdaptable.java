@@ -23,11 +23,11 @@ public interface DatabaseAdaptable {
     /**
      * @return la liste des 10 meilleurs du mode Sprint
      */
-    public List<SprintScore> getHighScoreSprintLimitTen(int indDifficulte);
+    public List<Score> getHighScoreSprintLimitTen(int indDifficulte);
 
     /**
      * @return la liste des 10 meilleurs du mode Defi
      */
-    public List<DefiScore> getHighScoreDefiLimitTen(int indDifficulte);
+    public List<Score> getHighScoreDefiLimitTen(int indDifficulte);
 
 }

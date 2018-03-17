@@ -9,6 +9,8 @@ public class DefiScore implements Score{
      * Default constructor
      */
     public DefiScore() {
+        this.id = null;
+        this.name = null;
     }
 
     /**
