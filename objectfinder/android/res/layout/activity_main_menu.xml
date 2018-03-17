@@ -7,7 +7,7 @@
     tools:context="fr.ua.heugue_ydee.objectfinder.MainMenuActivity">
 
     <Button
-        android:id="@+id/testButton"
+        android:id="@+id/jouerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/TestButtonString"
