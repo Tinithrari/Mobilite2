@@ -14,8 +14,11 @@ public class AndroidLauncher extends AndroidApplication {
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		int difficulty = savedInstanceState.getInt(ActivityPreGame.DIFFICULTY);
-		int mode = savedInstanceState.getInt(ActivityPreGame.GAMEMODE);
+		Intent intent = getIntent();
+		int difficulty = intent.getIntExtra(ActivityPreGame.DIFFICULTY, 0);
+		int mode = intent.getIntExtra(ActivityPreGame.GAMEMODE, 0);
+		System.out.println(difficulty);
+		System.out.println(mode);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		initialize(new ObjectFinder(difficulty, mode, new DBAdapter(new HighScoreDBHelper(this))), config);
 	}

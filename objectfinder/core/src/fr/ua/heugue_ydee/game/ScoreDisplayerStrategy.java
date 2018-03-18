@@ -5,15 +5,19 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+
+import java.awt.Font;
 
 /**
  * Element that permits to display score on the screen with a readable manner
  */
 public abstract class ScoreDisplayerStrategy {
 
-    private Texture banner;
+    protected Texture banner;
     private static final int HEIGHT_RATIO = 10;
-    private static final float ALPHA_VALUE = 0.2f;
+    private static final float ALPHA_VALUE = 0.7f;
+    private static final int FONT_SIZE = 64;
     protected SpriteBatch batch;
     protected BitmapFont font;
 
@@ -27,7 +31,10 @@ public abstract class ScoreDisplayerStrategy {
         this.banner = new Texture(pixmap);
         pixmap.dispose();
         this.batch = new SpriteBatch();
-        this.font = new BitmapFont();
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Fipps-Regular.otf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = FONT_SIZE;
+        this.font = generator.generateFont(parameter);
     }
 
     /**
@@ -35,7 +42,7 @@ public abstract class ScoreDisplayerStrategy {
      */
     public void draw() {
         this.batch.begin();
-        this.batch.draw(banner, 0, 0);
+        this.batch.draw(banner, 0, Gdx.graphics.getHeight() - banner.getHeight());
         this.batch.end();
     }
 

@@ -15,6 +15,7 @@ public class DefiScoreCounter implements ScoreCounterStrategy {
     private int score;
     private List<EndOfGameObserver> observers;
     private TimeCountStrategy timeCountStrategy;
+    private boolean blocked;
 
     /**
      * Create a score counter for defi mode
@@ -34,7 +35,25 @@ public class DefiScoreCounter implements ScoreCounterStrategy {
      */
     @Override
     public void update(int delta) {
-        this.timeCountStrategy.addTimeMillis(delta);
+        if (! blocked) {
+            this.timeCountStrategy.addTimeMillis(delta);
+
+            if (timeCountStrategy.getTime().getHours() == 0 &&
+                    timeCountStrategy.getTime().getMilliseconds() == 0 &&
+                    timeCountStrategy.getTime().getSeconds() == 0 &&
+                    timeCountStrategy.getTime().getMinutes() == 0)
+                notifyEndOfGame();
+        }
+    }
+
+    /**
+     * Block the count of the score
+     *
+     * @param blocked is the score count blocked
+     */
+    @Override
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 
     /**
@@ -44,7 +63,8 @@ public class DefiScoreCounter implements ScoreCounterStrategy {
      */
     @Override
     public void notifyDestroyableObserver(DestroyableObservable obs) {
-        this.score += 1;
+        if (! blocked)
+            this.score += 1;
     }
 
     /**

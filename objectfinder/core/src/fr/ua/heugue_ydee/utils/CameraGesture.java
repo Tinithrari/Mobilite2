@@ -26,6 +26,7 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor, Cl
     private Terrain terrain;
 
     private boolean dragging;
+    private boolean blocked;
 
     private final float PERCENTAGE = 0.025f;
 
@@ -34,7 +35,6 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor, Cl
      *
      * @param camera The camera to control
      * @param mass The mass of the camera
-     * @param terrain The terrain to ankle the camera
      */
     public CameraGesture(Camera camera, float mass) {
         super(new Vector2(camera.position.x, camera.position.y), mass);
@@ -43,6 +43,7 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor, Cl
         this.clickZone = null;
         this.oldPosition = null;
         this.clickObservers = new LinkedList<ClickObserver>();
+        this.blocked = false;
     }
 
     /**
@@ -52,18 +53,20 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor, Cl
      */
     public void update(float delta) {
         super.update(delta);
-        this.camera.translate(
-                new Vector3(super.getPosition().x, super.getPosition().y, 0).add(new Vector3(this.camera.position).scl(-1))
-        );
+        if (! blocked) {
+            this.camera.translate(
+                    new Vector3(super.getPosition().x, super.getPosition().y, 0).add(new Vector3(this.camera.position).scl(-1))
+            );
 
-        if (this.camera.position.x < 0)
-            this.camera.translate(this.camera.position.x, 0, 0);
-        if (this.camera.position.x > this.terrain.getWidth())
-            this.camera.translate(-this.terrain.getWidth() - this.camera.position.x, 0, 0);
-        if (this.camera.position.y < 0)
-            this.camera.translate(0, -this.terrain.getHeight(), 0);
-        if (this.camera.position.y > this.terrain.getHeight())
-            this.camera.translate(0, this.terrain.getHeight() - this.camera.position.y, 0);
+            if (this.camera.position.x < 0)
+                this.camera.translate(-this.camera.position.x, 0, 0);
+            if (this.camera.position.x > this.terrain.getWidth())
+                this.camera.translate(this.terrain.getWidth() - this.camera.position.x, 0, 0);
+            if (this.camera.position.y < 0)
+                this.camera.translate(0, -this.camera.position.y, 0);
+            if (this.camera.position.y > this.terrain.getHeight())
+                this.camera.translate(0, this.terrain.getHeight() - this.camera.position.y, 0);
+        }
 
     }
 
@@ -97,7 +100,7 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor, Cl
 
     @Override
     public boolean touchUp(int x, int y, int pointer, int button) {
-        if (pointer > 0 || button != Input.Buttons.LEFT)
+        if (pointer > 0 || button != Input.Buttons.LEFT || blocked)
             return false;
 
         this.oldPosition = null;
@@ -112,7 +115,7 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor, Cl
 
     @Override
     public boolean touchDragged(int x, int y, int pointer) {
-        if (! dragging)
+        if (! dragging ||blocked)
             return false;
 
         Vector2 position = new Vector2(x, y);
@@ -177,5 +180,14 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor, Cl
      */
     public void setTerrain(Terrain terrain) {
         this.terrain = terrain;
+    }
+
+    /**
+     * Block the camera
+     *
+     * @param blocked is the camera blocked?
+     */
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 }

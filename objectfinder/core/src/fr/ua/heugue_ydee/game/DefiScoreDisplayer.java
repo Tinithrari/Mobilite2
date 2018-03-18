@@ -36,9 +36,13 @@ public class DefiScoreDisplayer extends ScoreDisplayerStrategy {
     @Override
     public void draw() {
         super.draw();
+        this.batch.begin();
         this.scoreLayout.setText(this.font, "Score: " + this.counter.getScore());
         this.timeLayout.setText(this.font, "Time: " + this.counter.getTimeCountStrategy().getTime().toString());
-        this.font.draw(batch, this.scoreLayout, 0, 0);
-        this.font.draw(batch, this.timeLayout, Gdx.graphics.getWidth() - this.timeLayout.width, 0);
+        this.font.draw(batch, this.scoreLayout, 0, Gdx.graphics.getHeight() - (this.banner.getHeight() / 2)
+                + (this.timeLayout.height / 2));
+        this.font.draw(batch, this.timeLayout, Gdx.graphics.getWidth() - this.timeLayout.width, Gdx.graphics.getHeight() - (this.banner.getHeight() / 2)
+                + (this.timeLayout.height / 2));
+        this.batch.end();
     }
 }

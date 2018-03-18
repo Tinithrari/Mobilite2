@@ -13,4 +13,11 @@ public interface ScoreCounterStrategy extends EndOfGameObservable, DestroyableOb
      * @param delta The delta time between two frames in millis
      */
     void update(int delta);
+
+    /**
+     * Block the count of the score
+     *
+     * @param blocked is the score count blocked
+     */
+    void setBlocked(boolean blocked);
 }

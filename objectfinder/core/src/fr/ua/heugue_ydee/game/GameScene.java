@@ -13,7 +13,7 @@ import fr.ua.heugue_ydee.utils.TimeCountStrategy;
 /**
  * The game scene
  */
-public class GameScene {
+public class GameScene implements EndOfGameObserver{
 
     private Stage sceneGraph;
     private CameraGesture camera;
@@ -32,14 +32,16 @@ public class GameScene {
      * @param scoreCounter The strategy to count scores
      */
     public GameScene(Terrain terrain, DBAdapter database, CameraGesture camera, ScoreCounterStrategy scoreCounter,
-                     ScoreDisplayerStrategy scoreDisplayerStrategy) {
+                     ScoreDisplayerStrategy scoreDisplayerStrategy, Stage sceneGraph) {
         this.database = database;
-        this.sceneGraph = new Stage(new ScreenViewport());
         this.camera = camera;
+        this.sceneGraph = sceneGraph;
         this.sceneGraph.addActor(terrain);
         Gdx.input.setInputProcessor(this.camera);
         this.scoreCounter = scoreCounter;
         this.scoreDisplayerStrategy = scoreDisplayerStrategy;
+        terrain.addDestroyableObserver(this.scoreCounter);
+        this.scoreCounter.addEndOfGameObserver(this);
     }
 
     /**
@@ -60,4 +62,12 @@ public class GameScene {
         this.scoreDisplayerStrategy.dispose();
     }
 
+    /**
+     * Method called on the end of the game
+     */
+    @Override
+    public void notifyEndOfGame() {
+        this.camera.setBlocked(true);
+        this.scoreCounter.setBlocked(true);
+    }
 }

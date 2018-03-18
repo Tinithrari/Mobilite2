@@ -35,7 +35,11 @@ public class SprintScoreDisplayer extends ScoreDisplayerStrategy {
     @Override
     public void draw() {
         super.draw();
+        this.batch.begin();
         this.timeLayout.setText(font, "Time: " + this.counter.getTimeCountStrategy().getTime().toString());
-        font.draw(batch, this.timeLayout, Gdx.graphics.getWidth() - this.timeLayout.width, 0);
+        font.draw(batch, this.timeLayout, Gdx.graphics.getWidth() - this.timeLayout.width,
+                Gdx.graphics.getHeight() - (this.banner.getHeight() / 2)
+        + (this.timeLayout.height / 2));
+        this.batch.end();
     }
 }

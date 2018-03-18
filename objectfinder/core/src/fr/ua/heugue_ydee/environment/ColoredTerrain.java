@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import fr.ua.heugue_ydee.utils.ClickObservable;
@@ -20,6 +22,7 @@ public class ColoredTerrain extends Terrain implements DestroyableObserver {
     private Texture terrain;
     private DrawableRectangle rectangle;
     private ClickObservable clickEventManager;
+    private List<DestroyableObserver> observers;
 
     private static final int REDUCTION_FACTOR = 40;
 
@@ -40,6 +43,7 @@ public class ColoredTerrain extends Terrain implements DestroyableObserver {
         pixmap.dispose();
         this.clickEventManager = clickEventManager;
         this.generateNewSquare();
+        this.observers = new ArrayList<DestroyableObserver>();
     }
 
     private void generateNewSquare() {
@@ -77,6 +81,37 @@ public class ColoredTerrain extends Terrain implements DestroyableObserver {
     public void notifyDestroyableObserver(DestroyableObservable obs) {
         this.rectangle.removeDestroyableObserver(this);
         this.clickEventManager.removeClickObserver(this.rectangle);
+        notifyDestroyableObservers();
         generateNewSquare();
+    }
+
+    /**
+     * Add an observer to the list of item to notify
+     *
+     * @param observer The observer to add to the list
+     */
+    @Override
+    public void addDestroyableObserver(DestroyableObserver observer) {
+        this.observers.add(observer);
+    }
+
+    /**
+     * Remove an observer from the list of item to notify
+     *
+     * @param observer The observer to remove from the list
+     */
+    @Override
+    public void removeDestroyableObserver(DestroyableObserver observer) {
+        this.observers.remove(observer);
+    }
+
+    /**
+     * Notify all object of the destruction of the current object
+     */
+    @Override
+    public void notifyDestroyableObservers() {
+        for (DestroyableObserver obs : observers) {
+            obs.notifyDestroyableObserver(this.rectangle);
+        }
     }
 }

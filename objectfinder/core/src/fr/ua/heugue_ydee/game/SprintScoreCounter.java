@@ -13,6 +13,7 @@ public class SprintScoreCounter implements ScoreCounterStrategy {
 
     private List<EndOfGameObserver> observers;
     private TimeCountStrategy timeCountStrategy;
+    private boolean blocked;
 
     /**
      * Construct a sprint score counter
@@ -20,6 +21,7 @@ public class SprintScoreCounter implements ScoreCounterStrategy {
     public SprintScoreCounter(TimeCountStrategy timeCountStrategy) {
         this.observers = new ArrayList<EndOfGameObserver>();
         this.timeCountStrategy = timeCountStrategy;
+        this.blocked = false;
     }
 
     /**
@@ -68,7 +70,18 @@ public class SprintScoreCounter implements ScoreCounterStrategy {
      */
     @Override
     public void update(int delta) {
+        if (! blocked)
         this.timeCountStrategy.addTimeMillis(delta);
+    }
+
+    /**
+     * Block the count of the score
+     *
+     * @param blocked is the score count blocked
+     */
+    @Override
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 
     public TimeCountStrategy getTimeCountStrategy() {

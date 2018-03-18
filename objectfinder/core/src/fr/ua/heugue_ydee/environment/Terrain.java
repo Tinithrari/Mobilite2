@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Disposable;
 /**
  * An abstract representation of what is terrain
  */
-public abstract class Terrain extends Actor implements Disposable{
+public abstract class Terrain extends Actor implements Disposable, DestroyableObservable{
 
     private int width;
     private int height;

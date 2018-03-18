@@ -3,6 +3,7 @@ package fr.ua.heugue_ydee.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import fr.ua.heugue_ydee.environment.Terrain;
 import fr.ua.heugue_ydee.environment.TerrainFactory;
@@ -71,7 +72,7 @@ public class GameBuilder {
      */
     public GameScene buildGame() {
         // Generate the Environment
-        Stage stage = new Stage();
+        Stage stage = new Stage(new ScreenViewport());
         CameraGesture cameraGesture = new CameraGesture(stage.getCamera(), CAMERA_MASS);
         TerrainFactory terrainFactory = new TerrainFactory();
         Terrain t = terrainFactory.createColoredTerrain(WORLD_WIDTH, WORLD_HEIGHT, Color.WHITE, cameraGesture);
@@ -92,7 +93,7 @@ public class GameBuilder {
         }
 
         GameScene scene = new GameScene(t, adapter, cameraGesture, scoreDisplayerStrategy.getScoreCounter(),
-                scoreDisplayerStrategy);
+                scoreDisplayerStrategy, stage);
 
         return scene;
     }

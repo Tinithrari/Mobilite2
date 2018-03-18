@@ -15,7 +15,7 @@ import android.widget.Spinner;
 public class ActivityPreGame extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     public static final String DIFFICULTY = "Difficulte";
-    public static final String GAMEMODE = "Game_mode";
+    public static final String GAMEMODE = "Gamemode";
 
     private int difficulty;
     private int modeJeu;
@@ -64,7 +64,7 @@ public class ActivityPreGame extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (view.getId()){
+        switch (parent.getId()){
             case R.id.difficulty_spinner :
                 this.difficulty = position;
                 break;
