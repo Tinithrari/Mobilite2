@@ -7,6 +7,8 @@ public interface DestroyableObserver {
 
     /**
      * Notify this object of the destruction of an object
+     *
+     * @param obs The observable which fire the event
      */
     void notifyDestroyableObserver(DestroyableObservable obs);
 

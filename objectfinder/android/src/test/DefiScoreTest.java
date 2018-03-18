@@ -2,7 +2,7 @@ package test;
 
 import org.junit.Test;
 
-import model.DefiScore;
+import fr.ua.heugue_ydee.model.DefiScore;
 
 import static junit.framework.TestCase.assertEquals;
 

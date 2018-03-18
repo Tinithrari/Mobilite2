@@ -24,7 +24,17 @@ public class Chronometer implements TimeCountStrategy {
      */
     @Override
     public void addTimeMillis(int millis) {
-        this.time.addTime(0, 0, 0, millis);
+        this.time = this.time.addTime(0, 0, 0, millis);
+    }
+
+    /**
+     * Get the time
+     *
+     * @return the time stocked in this strategy
+     */
+    @Override
+    public Time getTime() {
+        return this.time;
     }
 
     @Override

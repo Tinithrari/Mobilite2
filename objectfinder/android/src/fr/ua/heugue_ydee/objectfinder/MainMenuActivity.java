@@ -7,9 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import model.Score;
+import fr.ua.heugue_ydee.model.Score;
 
 public class MainMenuActivity extends AppCompatActivity implements View.OnClickListener {
 

@@ -3,7 +3,7 @@ package test;
 import org.junit.Test;
 
 import fr.ua.heugue_ydee.utils.Time;
-import model.SprintScore;
+import fr.ua.heugue_ydee.model.SprintScore;
 
 import static junit.framework.Assert.assertEquals;
 
