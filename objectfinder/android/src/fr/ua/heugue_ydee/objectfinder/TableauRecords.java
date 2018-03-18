@@ -1,6 +1,5 @@
 package fr.ua.heugue_ydee.objectfinder;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.ua.heugue_ydee.utils.Time;
-import model.DefiScore;
-import model.HighScoreDBHelper;
-import model.IdentifierFoundException;
-import model.Score;
-import model.SprintScore;
+import fr.ua.heugue_ydee.model.DefiScore;
+import fr.ua.heugue_ydee.model.HighScoreDBHelper;
+import fr.ua.heugue_ydee.model.IdentifierFoundException;
+import fr.ua.heugue_ydee.model.Score;
+import fr.ua.heugue_ydee.model.SprintScore;
 
 /**
  * Activite prenant en charge la gestion du tableau des records.

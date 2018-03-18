@@ -10,7 +10,7 @@ import android.graphics.Color;
 
 import java.util.List;
 
-import model.Score;
+import fr.ua.heugue_ydee.model.Score;
 
 
 /**

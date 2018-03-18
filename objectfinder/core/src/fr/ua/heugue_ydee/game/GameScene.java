@@ -31,11 +31,11 @@ public class GameScene {
      * @param database The database to use to register scores
      * @param scoreCounter The strategy to count scores
      */
-    public GameScene(Terrain terrain, DBAdapter database, ScoreCounterStrategy scoreCounter,
+    public GameScene(Terrain terrain, DBAdapter database, CameraGesture camera, ScoreCounterStrategy scoreCounter,
                      ScoreDisplayerStrategy scoreDisplayerStrategy) {
         this.database = database;
         this.sceneGraph = new Stage(new ScreenViewport());
-        this.camera = new CameraGesture(this.sceneGraph.getCamera(), GameScene.CAMERA_WEIGHT, terrain);
+        this.camera = camera;
         this.sceneGraph.addActor(terrain);
         Gdx.input.setInputProcessor(this.camera);
         this.scoreCounter = scoreCounter;

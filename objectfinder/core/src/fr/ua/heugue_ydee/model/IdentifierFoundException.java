@@ -1,4 +1,4 @@
-package model;
+package fr.ua.heugue_ydee.model;
 
 /**
  * Created by Nicolas Ydee on 27/02/2018.

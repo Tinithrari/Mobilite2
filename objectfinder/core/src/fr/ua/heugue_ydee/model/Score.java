@@ -1,4 +1,4 @@
-package model;
+package fr.ua.heugue_ydee.model;
 
 /**
  * Created by Utilisateur on 01/03/2018.

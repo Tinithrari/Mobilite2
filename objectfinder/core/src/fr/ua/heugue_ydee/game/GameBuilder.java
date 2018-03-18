@@ -1,6 +1,15 @@
 package fr.ua.heugue_ydee.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+
+import fr.ua.heugue_ydee.environment.Terrain;
+import fr.ua.heugue_ydee.environment.TerrainFactory;
+import fr.ua.heugue_ydee.utils.CameraGesture;
+import fr.ua.heugue_ydee.utils.DBAdapter;
+import fr.ua.heugue_ydee.utils.TimeCountStrategy;
+import fr.ua.heugue_ydee.utils.TimeCounterFactory;
 
 /**
  * An object which build a game scene
@@ -34,20 +43,25 @@ public class GameBuilder {
 
     private int difficulty;
     private int mode;
+    private DBAdapter adapter;
 
-    private static final int coefficient = 2;
-    private static final int worldWidth = Gdx.graphics.getWidth() * GameBuilder.coefficient;
-    private static final int worldHeight = Gdx.graphics.getHeight() * GameBuilder.coefficient;
+    private static final int COEFFICIENT = 2;
+    private static final int WORLD_WIDTH = Gdx.graphics.getWidth() * GameBuilder.COEFFICIENT;
+    private static final int WORLD_HEIGHT = Gdx.graphics.getHeight() * GameBuilder.COEFFICIENT;
+
+    private static final float CAMERA_MASS = 0.0025f;
 
     /**
      * Build a game scene with a known game difficulty and a know game mode
      *
      * @param difficulty The difficulty of the game
      * @param mode The difficulty of the mode
+     * @param adapter The adapter to save game data in a database
      */
-    public GameBuilder(int difficulty, int mode) {
+    public GameBuilder(int difficulty, int mode, DBAdapter adapter) {
         this.difficulty = difficulty;
         this.mode = mode;
+        this.adapter = adapter;
     }
 
     /**
@@ -56,8 +70,30 @@ public class GameBuilder {
      * @return The game scene using the configuration given in this builder
      */
     public GameScene buildGame() {
-        // TODO implement here
-        return null;
-    }
+        // Generate the Environment
+        Stage stage = new Stage();
+        CameraGesture cameraGesture = new CameraGesture(stage.getCamera(), CAMERA_MASS);
+        TerrainFactory terrainFactory = new TerrainFactory();
+        Terrain t = terrainFactory.createColoredTerrain(WORLD_WIDTH, WORLD_HEIGHT, Color.WHITE, cameraGesture);
+        cameraGesture.setTerrain(t);
 
+        // Generate the mechanics of the game
+        TimeCounterFactory timeCounterFactory = new TimeCounterFactory();
+        ScoreDisplayerFactory displayerFactory = new ScoreDisplayerFactory();
+        TimeCountStrategy timeCountStrategy;
+        ScoreDisplayerStrategy scoreDisplayerStrategy;
+
+        if (this.mode == SPRINT_MODE) {
+            timeCountStrategy = timeCounterFactory.createChronometer();
+            scoreDisplayerStrategy = displayerFactory.createSprintScoreDisplayer(timeCountStrategy);
+        } else {
+            timeCountStrategy = timeCounterFactory.createMinuter(1, 0);
+            scoreDisplayerStrategy = displayerFactory.createDefiScoreDisplayer(timeCountStrategy);
+        }
+
+        GameScene scene = new GameScene(t, adapter, cameraGesture, scoreDisplayerStrategy.getScoreCounter(),
+                scoreDisplayerStrategy);
+
+        return scene;
+    }
 }

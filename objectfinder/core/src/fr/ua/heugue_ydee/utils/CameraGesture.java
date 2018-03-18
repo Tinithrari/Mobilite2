@@ -36,14 +36,13 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor, Cl
      * @param mass The mass of the camera
      * @param terrain The terrain to ankle the camera
      */
-    public CameraGesture(Camera camera, float mass, Terrain terrain) {
+    public CameraGesture(Camera camera, float mass) {
         super(new Vector2(camera.position.x, camera.position.y), mass);
         this.camera = camera;
         this.dragging = false;
         this.clickZone = null;
         this.oldPosition = null;
         this.clickObservers = new LinkedList<ClickObserver>();
-        this.terrain = terrain;
     }
 
     /**
@@ -169,5 +168,14 @@ public class CameraGesture extends ParticlePhysics implements InputProcessor, Cl
         for (ClickObserver obs : clickObservers) {
             obs.notifyClick(position);
         }
+    }
+
+    /**
+     * Define the terrain which is the ankle for the camera
+     *
+     * @param terrain The terrain to use
+     */
+    public void setTerrain(Terrain terrain) {
+        this.terrain = terrain;
     }
 }

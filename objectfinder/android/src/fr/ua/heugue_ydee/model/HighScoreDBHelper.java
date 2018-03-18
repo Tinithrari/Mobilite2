@@ -1,4 +1,4 @@
-package model;
+package fr.ua.heugue_ydee.model;
 
 import android.content.ContentValues;
 import android.content.Context;
