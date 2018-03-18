@@ -12,22 +12,22 @@ public interface DatabaseAdaptable {
      * Ajoute un score issu du mode Sprint dans la table
      * @param sprintScore
      */
-    void addHighScoreSprint(SprintScore sprintScore) throws IdentifierFoundException;
+    public void addHighScoreSprint(SprintScore sprintScore, int difficulte) throws IdentifierFoundException;
 
     /**
      * Ajoute un score issu du mode Defi dans la table
      * @param defiScore
      */
-    void addHighScoreDefi(DefiScore defiScore) throws IdentifierFoundException;
+    public void addHighScoreDefi(DefiScore defiScore, int difficulte) throws IdentifierFoundException;
 
     /**
      * @return la liste des 10 meilleurs du mode Sprint
      */
-    List<SprintScore> getHighScoreSprintLimitTen();
+    public List<Score> getHighScoreSprintLimitTen(int indDifficulte);
 
     /**
      * @return la liste des 10 meilleurs du mode Defi
      */
-    List<DefiScore> getHighScoreDefiLimitTen();
+    public List<Score> getHighScoreDefiLimitTen(int indDifficulte);
 
 }

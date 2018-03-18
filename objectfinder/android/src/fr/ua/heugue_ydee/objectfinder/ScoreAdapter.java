@@ -26,6 +26,15 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
     private LayoutInflater inflater;
 
     /**
+     *
+     * @param scores
+     */
+    public void setScores(List<Score> scores) {
+        this.scores = scores;
+        this.notifyDataSetChanged();
+    }
+
+    /**
      * Constructeur de l'adapter de scores
      * @param context : le contexte
      * @param scores : la liste des scores
@@ -56,7 +65,7 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
     public View getView(int position, View convertView, ViewGroup parent){
 
         //On recupere le score
-        Score score = getItem(position);
+        Score score = scores.get(position);
 
         if (convertView == null) {
             //Initialisation de notre item à partir du layout XML

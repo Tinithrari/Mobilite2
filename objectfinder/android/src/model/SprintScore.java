@@ -11,6 +11,9 @@ public class SprintScore implements Score{
      * Default constructor
      */
     public SprintScore() {
+        this.id = null;
+        this.name = null;
+        this.duration = null;
     }
 
     /**
@@ -50,7 +53,7 @@ public class SprintScore implements Score{
      * @param duration : la duree
      */
     public SprintScore(String name, Time duration) {
-        this.id = Long.valueOf(0);
+        this.id = null;
         this.name = name;
         this.duration = duration;
     }
