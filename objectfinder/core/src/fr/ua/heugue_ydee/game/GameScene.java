@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import fr.ua.heugue_ydee.environment.Terrain;
 import fr.ua.heugue_ydee.utils.CameraGesture;
 import fr.ua.heugue_ydee.utils.DBAdapter;
+import fr.ua.heugue_ydee.utils.ResourceLoader;
 import fr.ua.heugue_ydee.utils.TimeCountStrategy;
 
 /**

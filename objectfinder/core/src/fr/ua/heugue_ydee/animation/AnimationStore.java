@@ -10,20 +10,24 @@ import java.util.Map;
 public class AnimationStore {
 
     private static AnimationStore singleAnimation = new AnimationStore();
-    private Map<String, Animation> animations = new HashMap<String, Animation>();
+    private Map<String, Animation> animations = new HashMap<String, Animation>();;
+
+    private AnimationStore() {
+    }
 
     /**
+     * Retourne une instance du store
      *
      * @return l'instance de classe Animation correspondante
      */
-    private static AnimationStore get(){ return singleAnimation;}
+    public static AnimationStore get(){ return singleAnimation;}
 
     /**
      *
      * @param reference
      * @return l'animation correspondante
      */
-    private Animation getAnimation(String reference){
+    public Animation getAnimation(String reference){
 
         if(animations.get(reference) == null) {
             fail("The animation doesn't exist.");
@@ -40,7 +44,7 @@ public class AnimationStore {
     public void add(String reference, Animation animation) {
         if((reference == null) || reference.isEmpty())
             throw new IllegalArgumentException("Reference");
-        if (animations == null)
+        if (animation == null)
             throw new IllegalArgumentException("Animation");
         animations.put(reference,animation);
     }

@@ -11,6 +11,7 @@ import org.junit.Test;
 import fr.ua.heugue_ydee.game.GameBuilder;
 import fr.ua.heugue_ydee.game.GameScene;
 import fr.ua.heugue_ydee.utils.DBAdapter;
+import fr.ua.heugue_ydee.utils.ResourceLoader;
 
 public class ObjectFinder extends ApplicationAdapter {
 	/*SpriteBatch batch;
@@ -30,6 +31,7 @@ public class ObjectFinder extends ApplicationAdapter {
 
     @Override
 	public void create () {
+		ResourceLoader.load();
         GameBuilder builder = new GameBuilder(difficulty, mode, adapter);
         this.gameScene = builder.buildGame();
 	}

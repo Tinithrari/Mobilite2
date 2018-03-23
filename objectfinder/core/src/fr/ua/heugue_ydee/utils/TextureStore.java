@@ -1,12 +1,10 @@
-package fr.ua.heugue_ydee.animation;
+package fr.ua.heugue_ydee.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Aranys on 22/03/2018.
@@ -17,10 +15,16 @@ public class TextureStore {
     private static TextureStore singleTexture = new TextureStore();
     private Map<String, Texture> textures = new HashMap<String, Texture>();
 
+    private TextureStore() {
+
+    }
+
     /**
+     * Return an instance of the store
+     *
      * @return le TextureStore courant
      */
-    private static TextureStore get(){
+    public static TextureStore get(){
         return singleTexture;
     }
 
