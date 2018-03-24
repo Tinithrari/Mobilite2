@@ -46,7 +46,8 @@ public class AnimationStore {
             throw new IllegalArgumentException("Reference");
         if (animation == null)
             throw new IllegalArgumentException("Animation");
-        animations.put(reference,animation);
+        if (animations.get(reference) == null)
+            animations.put(reference,animation);
     }
 
     /**
@@ -56,5 +57,9 @@ public class AnimationStore {
     private void fail(String message) {
         System.err.println(message);
         System.exit(0);
+    }
+
+    public void unload() {
+        this.animations = new HashMap<String, Animation>();
     }
 }

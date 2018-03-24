@@ -75,7 +75,11 @@ public class GameBuilder {
         Stage stage = new Stage(new ScreenViewport());
         CameraGesture cameraGesture = new CameraGesture(stage.getCamera(), CAMERA_MASS);
         TerrainFactory terrainFactory = new TerrainFactory();
-        Terrain t = terrainFactory.createColoredTerrain(WORLD_WIDTH, WORLD_HEIGHT, Color.WHITE, cameraGesture);
+        Terrain t;
+        if (difficulty == 0)
+            t = terrainFactory.createColoredTerrain(WORLD_WIDTH, WORLD_HEIGHT, Color.WHITE, cameraGesture);
+        else
+            t = terrainFactory.createTiledTerrain(WORLD_WIDTH, WORLD_HEIGHT, cameraGesture);
         cameraGesture.setTerrain(t);
 
         // Generate the mechanics of the game

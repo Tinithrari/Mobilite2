@@ -41,4 +41,8 @@ public class TextureStore {
 
         return textures.get(reference);
     }
+
+    public void unload() {
+        textures = new HashMap<String, Texture>();
+    }
 }

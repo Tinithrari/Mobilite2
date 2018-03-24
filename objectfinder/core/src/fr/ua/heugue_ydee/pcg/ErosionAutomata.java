@@ -14,8 +14,8 @@ public class ErosionAutomata {
     private static final int EARTH_TILE = 1;
     private static final int WATER_TILE = 2;
 
-    private static final float EARTH_APPARITION_RATE = 0.2f;
-    private static final float ERROSION_RATE = 0.25f;
+    private static final float EARTH_APPARITION_RATE = 0.1f;
+    private static final float ERROSION_RATE = 0.1f;
 
     /**
      * Build the base grid for the cellular automate
@@ -56,10 +56,10 @@ public class ErosionAutomata {
      * @return The transition rate of the cell
      */
     private static float getTransitionRate(final int value, final int nbDifferentNeighbors) {
-        if (value == WATER_TILE) {
+        if (value == GRASS_TILE) {
             return ERROSION_RATE * nbDifferentNeighbors;
         }
-        return 2 - nbDifferentNeighbors;
+        return 0.70f;
     }
 
     /**

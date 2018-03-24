@@ -15,10 +15,22 @@ public final class TerrainFactory {
      * @param width The width of the terrain
      * @param height The height of the terrain
      * @param color The color of the terrain
+     * @param clickObservable The click event source
      * @return A colored terrain
      */
     public Terrain createColoredTerrain(int width, int height, Color color, ClickObservable clickObservable) {
         return new ColoredTerrain(width, height, color, clickObservable);
     }
 
+    /**
+     * Create a tiled terrain
+     *
+     * @param width The width of the terrain
+     * @param height The height of the terrain
+     * @param clickObservable The click event source
+     * @return A tiled terrain
+     */
+    public Terrain createTiledTerrain(int width, int height, ClickObservable clickObservable) {
+        return new TiledTerrain(width, height, clickObservable);
+    }
 }

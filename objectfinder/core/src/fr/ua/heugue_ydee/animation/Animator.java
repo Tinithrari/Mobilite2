@@ -5,10 +5,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import fr.ua.heugue_ydee.game.DrawableAdaptable;
+
 /**
  * Class to display an animation
  */
-public class Animator extends Actor {
+public class Animator extends Actor implements DrawableAdaptable {
     private float framerate;
     private boolean looped;
     private Animation animation;
@@ -88,5 +90,14 @@ public class Animator extends Actor {
         super.draw(batch, alphaParent);
         TextureRegion frame = animation.getFrame(index);
         batch.draw(frame, position.x, position.y, getWidth(), getHeight());
+    }
+
+    /**
+     * Return the animation state
+     *
+     * @return true if the animation is finished, false otherwise
+     */
+    public boolean isFinished() {
+        return framerate * animation.size() < elapsed;
     }
 }
