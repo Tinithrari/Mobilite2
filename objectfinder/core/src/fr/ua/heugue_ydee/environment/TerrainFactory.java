@@ -28,9 +28,10 @@ public final class TerrainFactory {
      * @param width The width of the terrain
      * @param height The height of the terrain
      * @param clickObservable The click event source
+     * @param difficulty The difficulty of the level
      * @return A tiled terrain
      */
-    public Terrain createTiledTerrain(int width, int height, ClickObservable clickObservable) {
-        return new TiledTerrain(width, height, clickObservable);
+    public Terrain createTiledTerrain(int width, int height, ClickObservable clickObservable, int difficulty) {
+        return new TiledTerrain(width, height, clickObservable, difficulty);
     }
 }

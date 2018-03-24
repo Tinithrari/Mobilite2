@@ -27,9 +27,10 @@ public class TiledTerrain extends Terrain {
     private  ClickObservable clickEventManager;
     private DrawableAdaptable[][] grid;
     private Egg egg;
+    private EasyHazard hazard;
     private List<DestroyableObserver> observers;
-    private static final int TILE_WIDTH = 128;
-    private static final int TILE_HEIGHT = 72;
+    public static final int TILE_WIDTH = 192;
+    public static final int TILE_HEIGHT = 108;
 
     private void generateGrid() {
         int widthGrid = (int) (getWidth() / TILE_WIDTH);
@@ -82,19 +83,30 @@ public class TiledTerrain extends Terrain {
         this.egg.setHeight(TILE_HEIGHT);
     }
 
+    private void generateHazards(int difficulty) {
+        if (difficulty == 1)
+            this.hazard = new EasyHazard(grid, TILE_WIDTH, TILE_HEIGHT, (int)getWidth() - TILE_WIDTH, (int)getHeight() - TILE_HEIGHT);
+        if (difficulty == 2)
+            this.hazard = new NormalHazard(grid, TILE_WIDTH, TILE_HEIGHT, (int)getWidth() - TILE_WIDTH, (int)getHeight() - TILE_HEIGHT);
+        if (difficulty == 3)
+            this.hazard = new HardHazard(grid, TILE_WIDTH, TILE_HEIGHT, (int)getWidth() - TILE_WIDTH, (int)getHeight() - TILE_HEIGHT);
+    }
+
     /**
      * Build a terrain using its width and its height
      *
      * @param width  The width of the terrain
      * @param height The height of the terrain
+     * @param difficulty The difficulty of the level
      */
-    public TiledTerrain(int width, int height, ClickObservable clickEventManager) {
+    public TiledTerrain(int width, int height, ClickObservable clickEventManager, int difficulty) {
         super(width, height);
         this.clickEventManager = clickEventManager;
         this.observers = new LinkedList<DestroyableObserver>();
 
         generateGrid();
         generateNewEgg();
+        generateHazards(difficulty);
     }
 
     @Override
@@ -157,5 +169,6 @@ public class TiledTerrain extends Terrain {
             }
         }
         this.egg.draw(batch, parentAlpha);
+        this.hazard.render(batch, parentAlpha);
     }
 }

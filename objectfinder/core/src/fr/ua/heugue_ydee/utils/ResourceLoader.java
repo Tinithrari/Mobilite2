@@ -150,7 +150,7 @@ public class ResourceLoader {
     private static void loadRain() {
         Texture pluie = TextureStore.get().getTexture(RAIN_TEXTURE);
         Animation animPluie = new Animation(pluie);
-        Rectangle frame = new Rectangle();
+        Rectangle frame = new Rectangle(0, 0, 64, 64);
         for (int i = 0; i < 192; i += 64) {
             frame.y = i;
             for (int j = 0; j < 192; j += 64) {

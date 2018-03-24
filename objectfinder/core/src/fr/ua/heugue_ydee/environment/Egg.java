@@ -91,7 +91,7 @@ public class Egg extends Actor implements DestroyableObservable, ClickObserver{
 
     @Override
     public void notifyClick(Vector2 position) {
-        Rectangle collider = new Rectangle(position.x, position.y, size.x, size.y);
+        Rectangle collider = new Rectangle(this.position.x, this.position.y, size.x, size.y);
         if (collider.contains(position)) {
             this.touched = true;
         }
