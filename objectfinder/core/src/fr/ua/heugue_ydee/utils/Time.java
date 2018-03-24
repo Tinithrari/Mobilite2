@@ -120,18 +120,23 @@ public class Time {
 
     /**
      * Add an amount of time to the current time
+     *
      * @param hours Number of hours to add
      * @param minutes Number of minutes to add
      * @param seconds Number of seconds to add
      * @param milliseconds Number of milliseconds to add
+     *
+     * @return The new Time after adding this time
      */
-    public void addTime(long hours, int minutes, int seconds, int milliseconds) {
-        this.hours += hours;
-        this.minutes += minutes;
-        this.seconds += seconds;
-        this.milliseconds += milliseconds;
+    public Time addTime(long hours, int minutes, int seconds, int milliseconds) {
+        Time t = new Time(this.hours + hours,
+        this.minutes + minutes,
+        this.seconds + seconds,
+        this.milliseconds + milliseconds);
 
-        this.correctTime();
+        t.correctTime();
+
+        return t;
     }
 
     @Override

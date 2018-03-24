@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Obect Finder</string>
+    <string name="app_name">Object Finder</string>
+    <string name="TestButtonString">Play</string>
+    <string name="HighscoreButton">Highscore</string>
 
+    <string-array name="difficulty_array">
+        <item>Basique</item>
+        <item>Facile</item>
+        <item>Normale</item>
+        <item>Difficile</item>
+    </string-array>
+
+    <string-array name="gamemode_array">
+        <item>Sprint</item>
+        <item>Defi</item>
+    </string-array>
+
+    <string name="start_game">Play</string>
 </resources>

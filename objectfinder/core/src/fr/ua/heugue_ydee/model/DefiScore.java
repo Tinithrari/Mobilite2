@@ -1,4 +1,4 @@
-package model;
+package fr.ua.heugue_ydee.model;
 
 /**
  * 
@@ -9,6 +9,8 @@ public class DefiScore {
      * Default constructor
      */
     public DefiScore() {
+        this.id = null;
+        this.name = null;
     }
 
     /**
@@ -75,13 +77,29 @@ public class DefiScore {
      *
      * @param name
      */
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
     /**
+<<<<<<< HEAD:objectfinder/android/src/model/DefiScore.java
      *
      * @return
+=======
+     * Return the score value
+     *
+     * @return A string that represent the score value
+     */
+    @Override
+    public String getScoreValue() {
+        return Long.toString(this.score);
+    }
+
+    /**
+     * Retourne le score obtenu
+     * @return : le score obtenu par le joueur
+>>>>>>> develop:objectfinder/core/src/fr/ua/heugue_ydee/model/DefiScore.java
      */
     public long getScore() {
         return score;
