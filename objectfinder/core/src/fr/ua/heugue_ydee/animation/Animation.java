@@ -1,19 +1,19 @@
 package fr.ua.heugue_ydee.animation;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Aranys on 22/03/2018.
+ * Représentation d'une animation en mémoire
  */
-
 public class Animation {
 
     private Texture texture;
-    private List<Rectangle> nosRectangles;
+    private List<TextureRegion> frames;
 
     /**
      * Constructeur de l'Animation
@@ -22,49 +22,45 @@ public class Animation {
      */
     public Animation(Texture texture){
         this.texture = texture;
-        this.nosRectangles = new ArrayList<Rectangle>();
+        this.frames = new ArrayList<TextureRegion>();
     }
 
     /**
+     * Retourne la frame associée à l'index
      *
-     * @param index
-     * @return le Rectangle correspondant
+     * @param index l'index de la frame
+     * @return La frame correspondant
      */
-    public Rectangle getFrame(int index){
-        return this.nosRectangles.get(index);
+    public TextureRegion getFrame(int index){
+        return this.frames.get(index);
     }
 
     /**
+     * Retourne le nombre de frame composant l'animation
      *
-     * @return la taille de la liste de nos rectangles
+     * @return la taille de la liste de frames
      */
     public int size(){
-        return this.nosRectangles.size();
+        return this.frames.size();
     }
 
     /**
-     * Ajoute un rectangle a notre liste courante
+     * Ajoute une frame a notre liste courante
      *
      * @param rectangle
      */
     public void addFrame(Rectangle rectangle){
-        this.nosRectangles.add(rectangle);
+        TextureRegion frame = new TextureRegion(texture, (int)rectangle.getX(), (int)rectangle.getY(),
+                (int)rectangle.width, (int)rectangle.height);
+        this.frames.add(frame);
     }
 
     /**
+     * Retourne la texture associée à l'animation
      *
      * @return la texture
      */
     public Texture getTexture() {
         return texture;
-    }
-
-    /**
-     * Modification de la texture
-     *
-     * @param texture
-     */
-    public void setTexture(Texture texture) {
-        this.texture = texture;
     }
 }

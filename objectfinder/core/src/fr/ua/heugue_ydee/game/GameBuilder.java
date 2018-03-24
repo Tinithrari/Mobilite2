@@ -92,8 +92,10 @@ public class GameBuilder {
             scoreDisplayerStrategy = displayerFactory.createDefiScoreDisplayer(timeCountStrategy);
         }
 
+        EndDialog dialog = new EndDialog(adapter, difficulty);
+
         GameScene scene = new GameScene(t, adapter, cameraGesture, scoreDisplayerStrategy.getScoreCounter(),
-                scoreDisplayerStrategy, stage);
+                scoreDisplayerStrategy, stage, dialog);
 
         return scene;
     }

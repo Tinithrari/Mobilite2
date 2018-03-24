@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.ua.heugue_ydee.environment.DestroyableObservable;
+import fr.ua.heugue_ydee.model.DefiScore;
+import fr.ua.heugue_ydee.model.Score;
 import fr.ua.heugue_ydee.utils.TimeCountStrategy;
 
 /**
@@ -57,6 +59,18 @@ public class DefiScoreCounter implements ScoreCounterStrategy {
     }
 
     /**
+     * Return the score of the game
+     *
+     * @return The score of the game
+     */
+    @Override
+    public Score getScoreData() {
+        DefiScore scoreData = new DefiScore();
+        scoreData.setScore(score);
+        return scoreData;
+    }
+
+    /**
      * Notify this object of the destruction of an object
      *
      * @param obs The observable which fire the event
@@ -99,6 +113,8 @@ public class DefiScoreCounter implements ScoreCounterStrategy {
     public int getScore() {
         return score;
     }
+
+
 
     public TimeCountStrategy getTimeCountStrategy() {
         return timeCountStrategy;

@@ -12,7 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import fr.ua.heugue_ydee.animation.Animation;
+import fr.ua.heugue_ydee.animation.AnimationStore;
+import fr.ua.heugue_ydee.animation.Animator;
 import fr.ua.heugue_ydee.utils.ClickObservable;
+import fr.ua.heugue_ydee.utils.ResourceLoader;
 
 /**
  * A monochrome terrain
@@ -23,8 +27,10 @@ public class ColoredTerrain extends Terrain implements DestroyableObserver {
     private DrawableRectangle rectangle;
     private ClickObservable clickEventManager;
     private List<DestroyableObserver> observers;
+    private Animator animator;
 
     private static final int REDUCTION_FACTOR = 40;
+    private static final float DUCK_FRAMERATE = 83.3f;
 
     /**
      * Create a monochrome terrain
@@ -44,6 +50,9 @@ public class ColoredTerrain extends Terrain implements DestroyableObserver {
         this.clickEventManager = clickEventManager;
         this.generateNewSquare();
         this.observers = new ArrayList<DestroyableObserver>();
+        this.animator = new Animator(DUCK_FRAMERATE, true, AnimationStore.get().getAnimation(ResourceLoader.WHITE_DUCK_RIGHT));
+        this.animator.setWidth(512);
+        this.animator.setHeight(512);
     }
 
     private void generateNewSquare() {
@@ -63,8 +72,10 @@ public class ColoredTerrain extends Terrain implements DestroyableObserver {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         this.rectangle.update(Gdx.graphics.getDeltaTime());
+        this.animator.update(Gdx.graphics.getDeltaTime() * 1000);
         batch.draw(terrain, 0, 0);
         this.rectangle.draw(batch, parentAlpha);
+        this.animator.render(new Vector2(0, 0), batch, parentAlpha);
     }
 
     @Override

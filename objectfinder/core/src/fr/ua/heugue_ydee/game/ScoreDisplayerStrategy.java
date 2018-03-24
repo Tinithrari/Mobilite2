@@ -17,7 +17,8 @@ public abstract class ScoreDisplayerStrategy {
     protected Texture banner;
     private static final int HEIGHT_RATIO = 10;
     private static final float ALPHA_VALUE = 0.7f;
-    private static final int FONT_SIZE = 64;
+    public static final int FONT_SIZE = 64;
+    public static final String FONT_LOCATION = "fonts/Magic_Moons.ttf";
     protected SpriteBatch batch;
     protected BitmapFont font;
 
@@ -31,7 +32,7 @@ public abstract class ScoreDisplayerStrategy {
         this.banner = new Texture(pixmap);
         pixmap.dispose();
         this.batch = new SpriteBatch();
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Fipps-Regular.otf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(FONT_LOCATION));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = FONT_SIZE;
         this.font = generator.generateFont(parameter);
