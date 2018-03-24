@@ -78,8 +78,9 @@ public class GameBuilder {
         Terrain t;
         if (difficulty == 0)
             t = terrainFactory.createColoredTerrain(WORLD_WIDTH, WORLD_HEIGHT, Color.WHITE, cameraGesture);
-        else
-            t = terrainFactory.createTiledTerrain(WORLD_WIDTH, WORLD_HEIGHT, cameraGesture);
+        else {
+            t = terrainFactory.createTiledTerrain(WORLD_WIDTH, WORLD_HEIGHT, cameraGesture, difficulty);
+        }
         cameraGesture.setTerrain(t);
 
         // Generate the mechanics of the game

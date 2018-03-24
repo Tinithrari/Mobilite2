@@ -64,4 +64,13 @@ public abstract class ParticlePhysics {
     public Vector2 getPosition() {
         return position;
     }
+
+    /**
+     * Define the position of the physics particle
+     *
+     * @param position The position of the physic particle
+     */
+    public void setPosition(Vector2 position) {
+        this.position = position;
+    }
 }
