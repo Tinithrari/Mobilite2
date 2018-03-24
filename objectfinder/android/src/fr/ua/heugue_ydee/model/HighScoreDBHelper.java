@@ -88,13 +88,15 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
     public String findDifficulte(final int indice){
         switch (indice) {
             case 0 :
-                return "Facile";
+                return "Basique";
             case 1:
-                return "Normale";
+                return "Facile";
             case 2 :
+                return "Normale";
+            case 3 :
                 return "Difficile";
             default :
-                return "Normale";
+                return "Basique";
         }
     }
 
