@@ -32,7 +32,6 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.highScoreButton:
                 Intent intentHighscore = new Intent(this, TableauRecords.class);
-                intentHighscore.putExtra("LISTE_RECORDS",new ArrayList<Score>());
                 startActivity(intentHighscore);
                 break;
         }

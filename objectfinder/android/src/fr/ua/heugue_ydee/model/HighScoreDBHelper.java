@@ -81,6 +81,24 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
     }
 
     /**
+     * Associe l'indice a la difficulte correspondante
+     * @param indice
+     * @return
+     */
+    public String findDifficulte(final int indice){
+        switch (indice) {
+            case 0 :
+                return "Facile";
+            case 1:
+                return "Normale";
+            case 2 :
+                return "Difficile";
+            default :
+                return "Normale";
+        }
+    }
+
+    /**
      * Ajoute un nouveau sprintScore dans la table correspondante
      * @param sprintScore : le sprintscore
      */
@@ -97,17 +115,7 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
         values.put(SECONDS_SPRINT,sprintScore.getDuration().getSeconds());
         values.put(MILLIS_SPRINT,sprintScore.getDuration().getMilliseconds());
 
-        switch (difficulte) {
-            case 0 :
-                values.put(DIFFICULTE_SPRINT, "Facile");
-                break;
-            case 1:
-                values.put(DIFFICULTE_SPRINT, "Normale");
-                break;
-            case 2 :
-                values.put(DIFFICULTE_SPRINT, "Difficile");
-                break;
-        }
+        values.put(DIFFICULTE_SPRINT,findDifficulte(difficulte));
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -132,17 +140,7 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
         values.put(NAME_DEFI, defiScore.getName());
         values.put(SCORE_DEFI, defiScore.getScore());
 
-        switch (difficulte) {
-            case 0 :
-                values.put(DIFFICULTE_DEFI, "Facile");
-                break;
-            case 1:
-                values.put(DIFFICULTE_DEFI, "Normale");
-                break;
-            case 2 :
-                values.put(DIFFICULTE_DEFI, "Difficile");
-                break;
-        }
+        values.put(DIFFICULTE_DEFI,findDifficulte(difficulte));
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -158,19 +156,7 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
      */
     public List<Score> getHighScoreSprintLimitTen(int indDifficulte) {
 
-        String difficulte = "";
-
-        switch (indDifficulte) {
-            case 0 :
-                difficulte = "Facile";
-                break;
-            case 1:
-                difficulte = "Normale";
-                break;
-            case 2 :
-                difficulte = "Difficile";
-                break;
-        }
+        String difficulte = findDifficulte(indDifficulte);
 
         final String queryHighScoreSprintLimitTen = "SELECT * " +
                 "FROM " + NAME_TABLE_SPRINT +
@@ -213,19 +199,7 @@ public class HighScoreDBHelper extends SQLiteOpenHelper implements DatabaseAdapt
      */
     public List<Score> getHighScoreDefiLimitTen(int indDifficulte) {
 
-        String difficulte = "";
-
-        switch (indDifficulte) {
-            case 0 :
-                difficulte = "Facile";
-                break;
-            case 1:
-                difficulte = "Normale";
-                break;
-            case 2 :
-                difficulte = "Difficile";
-                break;
-        }
+        String difficulte = findDifficulte(indDifficulte);
 
         final String queryHighScoreDefiLimitTen = "SELECT * " +
                 "FROM " + NAME_TABLE_DEFI +
