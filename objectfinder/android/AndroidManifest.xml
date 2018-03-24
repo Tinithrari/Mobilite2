@@ -31,10 +31,14 @@
         </activity>
         <activity
             android:name=".TableauRecords"
-            android:theme="@style/Theme.AppCompat.Light"></activity>
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"></activity>
         <activity
             android:name=".MainMenuActivity"
-            android:theme="@style/Theme.AppCompat.Light">
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,6 +47,8 @@
         </activity>
         <activity
             android:name=".ActivityPreGame"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize"
             android:theme="@style/Theme.AppCompat.Light"></activity>
     </application>
 
