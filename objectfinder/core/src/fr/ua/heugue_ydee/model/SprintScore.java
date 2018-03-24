@@ -98,8 +98,19 @@ public class SprintScore implements Score{
      *
      * @param name : le nom du joueur
      */
+    @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Return the score value
+     *
+     * @return A string that represent the score value
+     */
+    @Override
+    public String getScoreValue() {
+        return this.duration.toString();
     }
 
     /**

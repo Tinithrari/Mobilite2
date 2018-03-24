@@ -1,15 +1,11 @@
 package fr.ua.heugue_ydee.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import fr.ua.heugue_ydee.environment.Terrain;
 import fr.ua.heugue_ydee.utils.CameraGesture;
 import fr.ua.heugue_ydee.utils.DBAdapter;
-import fr.ua.heugue_ydee.utils.ResourceLoader;
-import fr.ua.heugue_ydee.utils.TimeCountStrategy;
 
 /**
  * The game scene
@@ -21,8 +17,8 @@ public class GameScene implements EndOfGameObserver{
     private DBAdapter database;
     private ScoreCounterStrategy scoreCounter;
     private ScoreDisplayerStrategy scoreDisplayerStrategy;
+    private EndDialog dialog;
 
-    private static final float CAMERA_WEIGHT = 0.005f;
     private static final int TO_MILLIS_COEFFICIENT = 1000;
 
     /**
@@ -33,7 +29,7 @@ public class GameScene implements EndOfGameObserver{
      * @param scoreCounter The strategy to count scores
      */
     public GameScene(Terrain terrain, DBAdapter database, CameraGesture camera, ScoreCounterStrategy scoreCounter,
-                     ScoreDisplayerStrategy scoreDisplayerStrategy, Stage sceneGraph) {
+                     ScoreDisplayerStrategy scoreDisplayerStrategy, Stage sceneGraph, EndDialog dialog) {
         this.database = database;
         this.camera = camera;
         this.sceneGraph = sceneGraph;
@@ -43,6 +39,8 @@ public class GameScene implements EndOfGameObserver{
         this.scoreDisplayerStrategy = scoreDisplayerStrategy;
         terrain.addDestroyableObserver(this.scoreCounter);
         this.scoreCounter.addEndOfGameObserver(this);
+        this.dialog = dialog;
+        this.database = database;
     }
 
     /**
@@ -70,5 +68,14 @@ public class GameScene implements EndOfGameObserver{
     public void notifyEndOfGame() {
         this.camera.setBlocked(true);
         this.scoreCounter.setBlocked(true);
+
+        this.dialog.setScore(scoreCounter.getScoreData());
+
+        Gdx.input.setInputProcessor(sceneGraph);
+
+        this.dialog.addContent();
+        this.sceneGraph.addActor(dialog);
+        this.dialog.pack();
+
     }
 }

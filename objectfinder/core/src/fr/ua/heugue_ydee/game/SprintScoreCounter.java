@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.ua.heugue_ydee.environment.DestroyableObservable;
+import fr.ua.heugue_ydee.model.Score;
+import fr.ua.heugue_ydee.model.SprintScore;
 import fr.ua.heugue_ydee.utils.TimeCountStrategy;
 
 /**
@@ -82,6 +84,18 @@ public class SprintScoreCounter implements ScoreCounterStrategy {
     @Override
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
+    }
+
+    /**
+     * Return the score of the game
+     *
+     * @return The score of the game
+     */
+    @Override
+    public Score getScoreData() {
+        SprintScore score = new SprintScore();
+        score.setDuration(timeCountStrategy.getTime());
+        return score;
     }
 
     public TimeCountStrategy getTimeCountStrategy() {

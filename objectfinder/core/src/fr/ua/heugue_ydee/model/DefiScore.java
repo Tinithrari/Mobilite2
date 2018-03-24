@@ -79,8 +79,19 @@ public class DefiScore implements Score{
      * Modification du nom du joueur
      * @param name : le nom du joueur
      */
+    @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Return the score value
+     *
+     * @return A string that represent the score value
+     */
+    @Override
+    public String getScoreValue() {
+        return Long.toString(this.score);
     }
 
     /**
