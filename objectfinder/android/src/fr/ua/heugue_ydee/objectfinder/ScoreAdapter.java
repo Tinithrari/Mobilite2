@@ -90,8 +90,8 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
                 tvRecord.setTextColor(Color.rgb(172,172,172)); // Couleur ARGENT
                 break;
             case 2 :
-                tvClassement.setTextColor(Color.rgb(97,78,26));
-                tvRecord.setTextColor(Color.rgb(97,78,26));// Couleur BRONZE
+                tvClassement.setTextColor(Color.rgb(244,102,27));
+                tvRecord.setTextColor(Color.rgb(244,102,27));// Couleur ORANGE
                 break;
             default:
                 tvClassement.setTextColor(Color.BLACK);
